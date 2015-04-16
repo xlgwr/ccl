@@ -1,0 +1,25 @@
+{
+  "name": "cclmotors",
+  "version": "0.0.0",
+  "description": "cclmotors home",
+  "main": "index.html",
+  "keywords": [
+    "cclmotors"
+  ],
+  "authors": [
+    "xlgwr"
+  ],
+  "license": "MIT",
+  "homepage": "www.cclmotors.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "avalon": "~1.4.2",
+    "oniui": "~1.3.8"
+  }
+}
