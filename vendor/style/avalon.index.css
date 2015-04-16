@@ -30,12 +30,15 @@ a, a:active, a:hover {
     z-index: 1000;
     position: relative;
 }
+.header .nav,.content ,.content .header, h1 span,.header h1 {
+	/*width: 990px;*/
+	 margin: 0 5px auto 5px;
+}
 .header .nav {
     position: relative;
-    width: 990px;
     height: 60px;
     line-height: 60px;
-    margin: 10px auto;/* 10px 10px;*/
+    margin: 10px auto 10px 10px;
     text-align: left;/*right*/
     padding: 0 5px;
     background: url(./avalonIcon.png) no-repeat;
@@ -130,12 +133,14 @@ a, a:active, a:hover {
     -o-transition: 1s opacity;
     transition: 1s opacity;
 }
+
 .header h1 {
-	width: 990px;
+	/*width: 990px;
+	margin: 0 auto;*/
+	
     height: 75px;
     line-height: 75px;
 	top: 15px;
-	margin: 0 auto;
     color: #f0fffb;
     background: rgba(0,75,141,0.6);
     box-shadow: 0 2px 0 0 #dafbf0;
@@ -147,18 +152,18 @@ a, a:active, a:hover {
 }
 .header h1 span {
     display: block;
-    width: 990px;
     text-align: left;
     padding: 0px 5px;
-    margin: 0 auto;/* auto 10px;*/
+    /*width: 990px;
+    margin: 0 auto; auto 10px;*/
 }
 
 .content {
     position: relative;	
 	top:16px;
-    width: 990px;
     min-height: 400px;
-    margin: 0 auto;/*  auto 10px;*/
+    /*width: 990px;
+    margin: 0 auto;  auto 10px;*/
     text-align: left;
     background-color: #fff;
 }
