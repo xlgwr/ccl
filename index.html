@@ -7,7 +7,7 @@
 		<meta name="language" content="en">
 		<meta name="robots" content="index, follow">
 		<meta name="description" content="捷和电机集团可以在全球范围内，提供独一无二的工程解决方案，可以满足特定应用的需求。">
-		<meta name="keywords" content="捷和电机集团">
+		<meta name="keywords" content="捷和电机集团 捷和电机 捷和 电机">
 		<meta name="author" content="Chicle Communications">
         <link type="text/css" rel="stylesheet" href="./vendor/style/avalon.doc.css" />
         <link type="text/css" rel="stylesheet" href="./vendor/style/avalon.index.css" />
@@ -70,7 +70,7 @@
             searchResultList = []
         })
         
-        //搜索組件
+        //搜索
         var searchResultList = [] //搜索结果列表
 
         function _findComponent(key) {
@@ -99,7 +99,7 @@
                     page.searchTipVisible = 0
                 }, 2000)
             }
-            //未找到组件
+            //未找到
             page.searchFailVisible = 1
             setTimeout(function() {
                 page.searchFailVisible = 0
@@ -108,49 +108,14 @@
 
         function _findInAdvice(componentName) {
             var advices = {
-                "accordion": "手风琴组件",
-                "at": "@组件",
-                "browser": "浏览器检测模块",
-                "button": "按钮组件",
-                "camera": "百叶窗图片轮播组件",
-                "carousel": "轮播组件/跑马灯组件",
-                "checkboxlist": "复选框列表组件",
-                "colorpicker": "颜色选择器组件/取色器组件",
-                "cookie": "cookie工具集组件",
-                "coupledatepicker": "日期范围选择的双日历组件",
-                "datepicker": "日期选择器组件",
-                "daterangepicker": "日期范围选择日历组件",
-                "dialog": "对话框弹窗组件",
-                "doublelist": "平衡木组件/左右列表组件/双列表组件",
-                "draggable": "拖拽组件/可拖动组件",
-                "dropdown": "下拉框组件",
-                "flipswitch": "滑动式开关组件",
-                "lazyload": "懒加载组件",
-                "live": "事件代理绑定组件",
-                "loading": "加载动画效果组件",
-                "menu": "菜单组件",
-                "miniswitch": "下拉式开关组件",
-                "notice": "提示组件/提示信息组件",
-                "pager": "分页组件",
-                "position": "定位组件",
-                "preview": "图片预览组件/图片批量预览组件",
-                "progressbar": "进度条组件/倒计时组件",
-                "promise": "异步列队组件",
-                "rating": "评分组件",
-                "resizable": "伸缩组件",
-                "scrollbar": "滚动条组件",
-                "scrollspy": "滚动监听组件",
-                "simplegrid": "表格组件/大数据展示组件",
-                "slider": "滑块组件",
-                "spinner": "数字输入框组件",
-                "store": "本地储存组件",
-                "switchdropdown": "切换下拉框组件",
-                "tab": "选项卡组件/标签页组件",
-                "textbox": "提示功能的输入框组件",
-                "timer": "时间选择器组件",
-                "tooltip": "气泡提示组件",
-                "uploader": "图片上传组件/文件上传组件",
-                "validation": "验证组件"
+                "Business Development":"业务拓展",
+				"Finance":"财务",
+				"Marketing":"销售",
+				"Orders":"订单",
+				"PE":"pe",
+				"Production":"生产",
+				"SCM":"scm",
+				"Warehouse":"仓库"
             }
             if (typeof advices[componentName] !== "undefined") {
                 return advices[componentName]
@@ -185,7 +150,7 @@
                         </li>
                     </ul>
                     <div class="search">
-                        <span class="search-tip" ms-css-opacity="{{searchFailVisible}}">未找到组件</span>
+                        <span class="search-tip" ms-css-opacity="{{searchFailVisible}}">未找到报表</span>
                         <span class="search-tip" ms-css-opacity="{{searchLastVisible}}">最后一个了</span>
                         <input  type="text" 
                                 placeholder="报表名或中文关键字..." 

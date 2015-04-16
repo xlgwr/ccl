@@ -84,7 +84,7 @@ a, a:active, a:hover {
     line-height: 60px;
 }
 .header .nav ul li.active a {
-    color: #389576;
+    color: rgb(0, 75, 141)/*#389576;*/
 }
 .header .search {
     position: absolute;
@@ -139,6 +139,9 @@ a, a:active, a:hover {
     color: #f0fffb;
     background: rgba(0,75,141,0.6);
     box-shadow: 0 2px 0 0 #dafbf0;
+	-moz-border-radius: 0 0 10px 10px;      /* Gecko browsers */
+    -webkit-border-radius: 0 0 10px 10px;    /* Webkit browsers */
+    border-radius:0 0 10px 10px;            /* W3C syntax */
     position: relative;
     z-index: 100;
 }
@@ -152,7 +155,7 @@ a, a:active, a:hover {
 
 .content {
     position: relative;	
-	top:15px;
+	top:16px;
     width: 990px;
     min-height: 400px;
     margin: 0 auto;/*  auto 10px;*/
@@ -172,12 +175,15 @@ a, a:active, a:hover {
     display:inline-block;
     *display:inline;
     *zoom:1;
-    width:160px;
-    height:34px;
-    line-height:34px;
+    width:200px;
+    height:35px;
+    line-height:35px;
     font-size: 15px;
     cursor: pointer;
-    text-indent:4px;
+    text-indent:5px;
+	-moz-border-radius:5px;      /* Gecko browsers */
+    -webkit-border-radius:5px;       /* Webkit browsers */
+    border-radius:5px;   
 }
 
 .ui-list a.odd {

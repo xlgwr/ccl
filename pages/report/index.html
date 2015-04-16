@@ -1,10 +1,5 @@
 <script>
-var widgets = ["accordion", "at", "browser","button", "camera", "carousel", "checkboxlist", "colorpicker", "cookie",
-    "coupledatepicker", "datepicker", "daterangepicker", "dialog",
-    "doublelist", "draggable", "dropdown", "dropdownlist", "flipswitch", "lazyload", "loading", "live","mask", "menu", "miniswitch", "mmRouter",
-    "notice", "pager", "position", "preview", "progressbar", "promise", "rating",
-    "resizable", "scrollbar", "scrollspy", "smartgrid", "simplegrid", "slider",
-    "spinner", "store", "switchdropdown", "tab", "textbox", "timer", "tree","tooltip", "uploader","validation"
+var widgets = ["Business Development","Finance","Marketing","Orders","PE","Production","SCM","Warehouse"
 ].sort()
 var updateHistory = false //将此url更新入浏览历史
 var vmodel = avalon.define("library", function(vm) {
@@ -42,11 +37,11 @@ var vmodel = avalon.define("library", function(vm) {
                 break
         }
         if (window.location.href.indexOf("?ex") > -1 && index === -1) { //ex页面，exp:...avalon.oniui/index.html#avalon.datepicker.doc.html?ex=ex1
-            vm.widgetHref = prefix + "/avalon." + name + "." + window.location.href.split("example=")[1] + ".html" //寻找目录下示例页
+            vm.widgetHref = prefix + "/report." + name + "." + window.location.href.split("example=")[1] + ".html" //寻找目录下示例页
         } else {
             var curLocation = window.location.href.split("#")[0]
-            vm.widgetHref = prefix + "/avalon." + name + ".doc.html?ts=" + Date.parse(new Date()) //使页面刷新
-            replaceLocation(curLocation + "#avalon." + name + ".doc.html") //doc页面
+            vm.widgetHref = prefix + "/report." + name + ".html?ts=" + Date.parse(new Date()) //使页面刷新
+            replaceLocation(curLocation + "#report." + name + ".html") //doc页面
         }
         updateHistory = true //需要更新入浏览历史
     }
@@ -210,7 +205,7 @@ function init() {
 </script>
 <table class="oniui-content" width="100%" ms-controller="library">
     <tr>
-        <td valign="top" style="width:130px;padding:0">
+        <td valign="top" style="width:200px;padding:0">
             <ul id="ui-list" class="ui-list">
                 <li ms-repeat="widgets">
                     <a  href="javascript:void(0)"
