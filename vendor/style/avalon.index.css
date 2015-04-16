@@ -1,6 +1,6 @@
 body {
     font: 14px/1.5 "微软雅黑","OpenSansRegular","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: #eaeaea;
+    background: #fff;/*#eaeaea;*/
     text-align: center;
 }
 body, div, ul, li, h1{
@@ -32,10 +32,10 @@ a, a:active, a:hover {
 }
 .header .nav {
     position: relative;
-    /*width: 990px;*/
+    width: 990px;
     height: 60px;
     line-height: 60px;
-    margin: 10px auto 10px 10px;
+    margin: 10px auto;/* 10px 10px;*/
     text-align: left;/*right*/
     padding: 0 5px;
     background: url(./avalonIcon.png) no-repeat;
@@ -131,29 +131,31 @@ a, a:active, a:hover {
     transition: 1s opacity;
 }
 .header h1 {
+	width: 990px;
     height: 75px;
     line-height: 75px;
 	top: 15px;
+	margin: 0 auto;
     color: #f0fffb;
-    background: rgb(0,75,141);
+    background: rgba(0,75,141,0.6);
     box-shadow: 0 2px 0 0 #dafbf0;
     position: relative;
     z-index: 100;
 }
 .header h1 span {
     display: block;
-    /*width: 990px;*/
+    width: 990px;
     text-align: left;
     padding: 0px 5px;
-    margin: 0 auto auto 10px;
+    margin: 0 auto;/* auto 10px;*/
 }
 
 .content {
     position: relative;	
 	top:15px;
-    /*width: 990px;*/
+    width: 990px;
     min-height: 400px;
-    margin: 0 auto  auto 10px;
+    margin: 0 auto;/*  auto 10px;*/
     text-align: left;
     background-color: #fff;
 }
@@ -184,7 +186,7 @@ a, a:active, a:hover {
 }
 
 .ui-list a.active {
-    background-color: rgb(0,75,141);
+    background-color: rgba(0,75,141,0.6);
     color:#fff;
 }
 
@@ -227,7 +229,7 @@ a, a:active, a:hover {
     float: left;
 }
 .footer ul li a:hover {
-    color: rgb(0,75,141);
+    color: rgba(0,75,141,0.6);
 }
 .ui-dialog .ui-dialog-inner .ui-dialog-header .ui-dialog-title {
     font-size: 18px;
