@@ -1,0 +1,28 @@
+{
+  "name": "cclapi",
+  "version": "1.0.0",
+  "description": "ccl api",
+  "main": "ccl.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ccl",
+    "api"
+  ],
+  "author": "xlgwr",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^0.8.2",
+    "body-parser": "^1.12.3",
+    "express": "^4.12.3",
+    "express-jwt": "^3.0.0",
+    "feed": "^0.2.6",
+    "json": "^9.0.3",
+    "jsonwebtoken": "^5.0.0",
+    "mongoose": "^4.0.1",
+    "morgan": "^1.5.2",
+    "mssql": "^2.1.2",
+    "redis": "^0.12.1"
+  }
+}

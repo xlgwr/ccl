@@ -1,6 +1,29 @@
 <script>
-var widgets = ["Business Development","Finance","Marketing","Orders","PE","Production","SCM","Warehouse"
-].sort()
+var widgets = [];//["Business Development","Finance","Marketing","Orders","PE","Production","SCM","Warehouse"].sort()
+
+require(['jquery','domReady!'], function($) {
+				var dd=$('.footer').html();
+				console.log(dd);
+			$.ajax({
+				type: "get",
+				url: 'http://localhost:3001/qadreportsurls',
+				beforeSend: function(XMLHttpRequest){
+					console.log("start get");
+					//ShowLoading();
+				},
+				success: function(data, status) {
+				
+					vmodel.widgets=data;
+					vmodel.changeActiveIndex(-1);
+					//console.log(vmodel.widgets);
+					       
+				},
+				error: function(){
+					console.log("error ajax 20");
+				}
+			});
+});
+
 var updateHistory = false //将此url更新入浏览历史
 var vmodel = avalon.define("library", function(vm) {
     vm.widgets = widgets
@@ -10,12 +33,12 @@ var vmodel = avalon.define("library", function(vm) {
     vm.changeActiveIndex = function(index, e) { //左侧边栏点击和页面初始化时，更新iframe的src以及页面url
         var name, prefix
         if (index !== -1) { //左侧边栏点击
-            if(vm.widgets[index] == "mmRouter") {
+            if(vm.widgets[index]['value'] == "mmRouter") {
                 window.open("mmRouter/avalon.mmRouter.doc.html")
                 return e.preventDefault()
             }
             vm.activeIndex = index
-            name = vm.widgets[index]
+            name = vm.widgets[index]['value']
         } else { //页面初始化
             if (location.href.indexOf("#") > -1) { //exp: http.....avalon.oniui/index.html#avalon.datepicker.doc.html
                 var curLocation = location.href.split("#")[1] //exp: avalon.datepicker.doc.html
@@ -66,6 +89,7 @@ function init() {
     }
     
     var iframe = document.getElementById("widgetFrame")
+	
     vmodel.changeActiveIndex(-1) //页面初始化
 
     if (iframe.attachEvent) { //响应iframe load事件
@@ -207,12 +231,12 @@ function init() {
     <tr>
         <td valign="top" style="width:200px;padding:0">
             <ul id="ui-list" class="ui-list">
-                <li ms-repeat="widgets">
+                <li ms-each="widgets">
                     <a  href="javascript:void(0)"
                         ms-class-odd="$index % 2 === 1"
                         ms-class="active: $index===activeIndex"
                         ms-click="changeActiveIndex($index, $event)">
-                        {{el}}
+                        {{el.value}}
                     </a>
                 </li>
             </ul>

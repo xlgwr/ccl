@@ -14,7 +14,17 @@
         <script src="./bower_components/avalon/avalon.js"></script>		
         <script src="./pages/report/history.js"></script>
         <script>
-        var page = avalon.define("pages", function(vm) {
+			avalon.config({
+				paths:{
+					jquery: "../../bower_components/jquery/dist/jquery.js"
+				},
+				shim:{
+					jquery:{
+					exports: "jQuery"
+					}
+				}
+			});		
+          var page = avalon.define("pages", function(vm) {
             vm.pages = [{
                     title: "报表中心",
                     href: "pages/report/index.html"

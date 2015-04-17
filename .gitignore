@@ -27,3 +27,6 @@ session.
 *.*#
 /bower_components/*
 /node_modules/*
+
+/api/bower_components/*
+/api/node_modules/*
