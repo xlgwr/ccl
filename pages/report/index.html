@@ -21,8 +21,8 @@ var vmodel = avalon.define("library", function(vm) {
                 var curLocation = location.href.split("#")[1] //exp: avalon.datepicker.doc.html
                 name = curLocation.split(".")[1] //exp: datepicker
                 vm.activeIndex = vm.widgets.indexOf(name)
-            } else { //exp：..../avalon.oniui/index.html
-                name = "accordion"
+            } else { //exp：..../index.html
+                name = "Business Development"
             }
         }
         prefix = name //处理一般情况
@@ -32,8 +32,8 @@ var vmodel = avalon.define("library", function(vm) {
                 prefix = "datepicker"
                 break
             case "html": //处理默认无后缀情况
-                name = "accordion"
-                prefix = "accordion"
+                name = "Business Development"
+                prefix = "Business Development"
                 break
         }
         if (window.location.href.indexOf("?ex") > -1 && index === -1) { //ex页面，exp:...avalon.oniui/index.html#avalon.datepicker.doc.html?ex=ex1
@@ -41,7 +41,7 @@ var vmodel = avalon.define("library", function(vm) {
         } else {
             var curLocation = window.location.href.split("#")[0]
             vm.widgetHref = prefix + "/report." + name + ".html?ts=" + Date.parse(new Date()) //使页面刷新
-            replaceLocation(curLocation + "#report." + name + ".html") //doc页面
+            replaceLocation(curLocation + "#report." + name + ".html") //页面
         }
         updateHistory = true //需要更新入浏览历史
     }

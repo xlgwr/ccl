@@ -26,3 +26,4 @@ session.
 *.*~
 *.*#
 /bower_components/*
+/node_modules/*
