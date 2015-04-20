@@ -12,9 +12,11 @@
         <link type="text/css" rel="stylesheet" href="./vendor/style/avalon.doc.css" />
         <link type="text/css" rel="stylesheet" href="./vendor/style/avalon.index.css" />
         <script src="./bower_components/avalon/avalon.js"></script>		
-        <script src="./pages/report/history.js"></script>
+        <script src="./pages/report/history.js"></script>	
+		<script src='../../config/config.js'></script>		
         <script>
-			avalon.config({
+		 //avalon.log("1index:"+config.acaoIp);
+		 avalon.config({
 				paths:{
 					jquery: "../../bower_components/jquery/dist/jquery.js"
 				},
@@ -23,7 +25,7 @@
 					exports: "jQuery"
 					}
 				}
-			});		
+		  });			
           var page = avalon.define("pages", function(vm) {
             vm.pages = [{
                     title: "报表中心",

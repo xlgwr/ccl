@@ -5,6 +5,7 @@ var bodyParser=require('body-parser');//bodyparser+json+urlencoder
 //var morgan=require('morgan');//logger
 //var tokenManager=require('./config/token_manager');
 //var secret=require('./config/secret');
+var config=require('./config/config.js');
 
 app.listen(3001);
 app.use(bodyParser.urlencoded({extended:true}));
@@ -23,9 +24,10 @@ routes.qadReportsUrls=require('./route/qadReportsUrls.js');
 
 
 app.all('*',function(req,res,next){
-    res.set('Access-Control-Allow-Origin','http://localhost');
-    res.set('Access-Control-Allow-Origin','http://localhost:8000');
-    res.set('Access-Control-Allow-Origin','http://172.16.122.50:8000');
+   // res.set('Access-Control-Allow-Origin','http://localhost');
+   // res.set('Access-Control-Allow-Origin','http://localhost:8000');
+    console.log(config.acaoIp);
+    res.set('Access-Control-Allow-Origin',config.acaoIp);
     //res.set('Access-Control-Allow-Credentials', true);
     //res.set('Access-Control-Allow-Methods', 'GET');//, POST, DELETE, PUT');
     //res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');

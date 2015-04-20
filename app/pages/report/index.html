@@ -2,7 +2,9 @@
 var widgets = [];//["Business Development","Finance","Marketing","Orders","PE","Production","SCM","Warehouse"].sort()
 var updateHistory = false //将此url更新入浏览历史
 var tmpurl='http://172.16.122.50:3001/qadreportsurls/' //ajax url
- 
+
+avalon.log("2:"+config.acaoIp);
+
 var vmodel = avalon.define("library", function(vm) {
     vm.widgets = widgets
     vm.activeIndex = 0

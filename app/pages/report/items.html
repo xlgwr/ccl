@@ -3,7 +3,9 @@
 <head>
     <meta charset='utf-8'/>
     <title>smartgrid demo</title>
-    <script src='../../bower_components/avalon/avalon.js'></script>
+    <script src='../../bower_components/avalon/avalon.js'></script>	
+    <script src='../../config/config.js'></script>
+	
 </head>
 <body ms-controller="test">
 	<div>
@@ -15,7 +17,8 @@
     <script>
 	 var curSubName = unescape(window.location.href.split("&")[0].split('=')[1]);	
 	 //avalon.log("DDDD:"+curSubName);
-	 var tmpurl='http://172.16.122.50:3001/qadreportsurls/'+curSubName
+	 avalon.log("3item:"+config.acaoIp);
+	 var tmpurl=config.apiIp+'/qadreportsurls/'+curSubName
 	 var prefixReport='http://portal.cclmotors.com/_layouts/15/ReportServer/RSViewerPage.aspx?rv:RelativeReportUrl=/QAD Reports/'+curSubName+'/';
 	 //var prefixReport='http://portal.cclmotors.com/QAD Reports/'+curSubName+'/';
 	 //avalon.log("AAAAAAAAAAAAAAAA:"+prefixReport);

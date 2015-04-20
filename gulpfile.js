@@ -3,14 +3,14 @@ var concat = require('gulp-concat');
 
 
 var paths = {
-    scripts:['vendor/js/**/*.js'],
-    styles:['vendor/style/*.css']
+    scripts:['app/vendor/js/**/*.js'],
+    styles:['app/vendor/style/*.css']
 };
 
 gulp.task('scripts',function(){
     return gulp.src(paths.scripts)
-        .pipe(concat('ccl.js'))
-	.pipe(gulp.dest('dist/js'));
+        .pipe(concat('cclclient.js'))
+	.pipe(gulp.dest('app/dist/js'));
 });
 
 //the default task (call by gulp)
