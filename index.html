@@ -68,7 +68,7 @@
             vm.searchLastVisible = 0
         })
         page.activeIndex = page.computeActiveIndex()
-        require(["../../bower_components/oniui/uptop/avalon.uptop", "ready!"], function() {
+        require(["../../bower_components/oniui/uptop/avalon.uptop", "domReady!"], function() {
             avalon.define("oniui_uptop", function(vm) {
                 vm.width = 120,
                 vm.animate = true
@@ -118,14 +118,14 @@
 
         function _findInAdvice(componentName) {
             var advices = {
-                "Business  Development":"业务拓展",
-				"Finance":"财务",
-				"Marketing":"销售",
-				"Orders":"订单",
+                "Business  Development":"business  development 业务拓展",
+				"Finance":"finance 财务",
+				"Marketing":"marketing 销售",
+				"Orders":"orders 订单",
 				"PE":"pe",
-				"Production":"生产",
+				"Production":"production 生产",
 				"SCM":"scm",
-				"Warehouse":"仓库"
+				"Warehouse":"warehouse 仓库"
             }
             if (typeof advices[componentName] !== "undefined") {
                 return advices[componentName]

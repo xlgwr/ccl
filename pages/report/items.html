@@ -6,41 +6,19 @@
     <script src='../../bower_components/avalon/avalon.js'></script>
 </head>
 <body ms-controller="test">
-   <div ms-widget="smartgrid, sg1, opts" style="margin: 0 auto"></div>
+	
+    <div ms-widget="smartgrid, sg1, opts" style="margin: 0 auto"></div>
     <script>
-       var dd=require(["../../bower_components/oniui/smartgrid/avalon.smartgrid",
+	 var curSubName = unescape(window.location.href.split("&")[0].split('=')[1]);	
+	 //avalon.log("DDDD:"+curSubName);
+	 var tmpurl='http://localhost:3001/qadreportsurls/'+curSubName
+	 var prefixReport='http://portal.cclmotors.com/QAD Reports/'+curSubName+'/';
+	 //avalon.log("AAAAAAAAAAAAAAAA:"+prefixReport);
+	 
+       require(["../../bower_components/oniui/smartgrid/avalon.smartgrid",
 				"../../bower_components/oniui/switchdropdown/avalon.switchdropdown"], function() {
-			var itemsdata=[];
-			//use jqery
-			require(['../../bower_components/jquery/dist/jquery.js','domReady!'], function($) {
-			
-			var curSubName = unescape(window.location.href.split("&")[0].split('=')[1]);	
-			//console.log("DDDD:"+curSubName);
-			var tmpurl='http://localhost:3001/qadreportsurls/'+curSubName
-			var prefixReport='http://portal.cclmotors.com/QAD Reports/'+curSubName+'/';
-			console.log("AAAAAAAAAAAAAAAA:"+prefixReport);
-			
-			$.ajax({
-				type: "get",
-				url: tmpurl,
-				beforeSend: function(XMLHttpRequest){
-					console.log("start get subname");
-				},
-				success: function(data, status) {
-									
-					//console.log(data);		
-					itemsdata=data;   
-					var sg1 = avalon.vmodels.sg1
-                    sg1.data = itemsdata//getDatas(500)
-                    sg1.render()				
-				},
-				error: function(){
-					console.log("error ajax 20");
-				}
-			});
-			});
-			///use jquery
-			console.log("start data grid");
+			//var itemsdata=[];
+			avalon.log("start data grid");
 			//testdata
             function getDatas(number) {
                 var data = []
@@ -63,22 +41,21 @@
                 return data
             }
              
-            avalon.define("test", function(vm) {				
+            var vmitem=avalon.define("test", function(vm) {				
                 vm.$skipArray = ["opts"] //不需要转为监控属性的属性务必放到$skipArray数组中，减少开销提高性能
-                vm.render = function() {
-                    var data = itemsdata
+				aurl: ''
+				vm.render = function(data) {
                     //data[0].checkboxShow = true
-					if(data){					
-                    avalon.vmodels.sg1.render(data)
+					vmitem.aurl=prefixReport
+					vmitem.data=data
+					if(vmitem.data){					
+						avalon.vmodels.sg1.render(vmitem.data)
 					}
                 }
 				vm.aclick = function(){
 					var tampurl=this;
-					console.log('aaaaaaaaaaaaaaa:'+tampurl);
+					avalon.log('aaaaaaaaaaaaaaa:'+tampurl);
 					window.open(tampurl);
-					if(itemsdata){					
-							avalon.vmodels.sg1.render(data)
-					}
 					return;
 				}
                 vm.opts = {
@@ -106,8 +83,7 @@
                         $X: function(vmId, field, index, cellValue, rowData) {//所有包装函数都会收到4个参数，分别是smartgrid组件对应vmodel的id，列标志(key)，列索引，列数据值
                             //avalon.log("arguments is : ")
                             //avalon.log(arguments)
-							var curSubNametmp = unescape(window.location.href.split("&")[0].split('=')[1]);	
-							var aurl="http://portal.cclmotors.com/QAD Reports/"+curSubNametmp+"/"+cellValue
+							var aurl=vmitem.aurl+"/"+cellValue
 							//avalon.log(aurl)ms-click='aclick'
                             return "<a href='"+aurl+"' target='_blank'>"+cellValue+"</a>"
                         },
@@ -152,11 +128,33 @@
                             //format: "$X" // 定义渲染数据的方法名
                         }
                     ],
-                    data: itemsdata//getDatas(8)
+                    data: []//getDatas(8)
                 }
             })
             avalon.scan()
-
+			 //use jqery
+			require(['../../bower_components/jquery/dist/jquery.js','domReady!'], function($) {
+									
+			$.ajax({
+				type: "get",
+				url: tmpurl,
+				beforeSend: function(XMLHttpRequest){
+					avalon.log("start get subname");
+				},
+				success: function(data, status) {
+									
+					//avalon.log(data);		
+                    vmitem.render(data)	
+					//var sg1 = avalon.vmodels.sg1
+					//sg1.render(data)
+				    //avalon.log(vmitem.aurl)
+				},
+				error: function(){
+					avalon.log("error ajax 20");
+				}
+			});
+			});
+			///use jquery
         })
     </script>
 </body>

@@ -7,7 +7,7 @@ exports.list=function(req,res) {
 	//...error checks
 
 	var request = new db.sql.Request();
-	request.query("select dirname as name,leafname as value from dbo.Docs where dirname = 'QAD Reports' and leafname not in('Data Source','Forms')",
+	request.query("select distinct dirname as name,leafname as value from dbo.Docs where dirname = 'QAD Reports' and leafname not in('Data Source','Forms')",
 		      function(err,recordset){
 			  //console.dir(recordset);
 			  if (err) {
@@ -32,7 +32,7 @@ exports.listAll=function(req,res) {
 	return res.send(400);
     }
 
-    var tmpsql="select dirname as name,leafname as value,'' as rdesc from dbo.Docs where dirname = 'QAD Reports/"+subitem+"'";
+    var tmpsql="select distinct dirname as name,leafname as value,'' as rdesc from dbo.Docs where dirname = 'QAD Reports/"+subitem+"'";
     console.log(tmpsql);
     db.sql.connect(db.config,function(err){
 	//...error checks
