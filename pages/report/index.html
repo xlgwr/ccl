@@ -1,6 +1,8 @@
 <script>
 var widgets = [];//["Business Development","Finance","Marketing","Orders","PE","Production","SCM","Warehouse"].sort()
 var updateHistory = false //将此url更新入浏览历史
+var tmpurl='http://172.16.122.50:3001/qadreportsurls/' //ajax url
+ 
 var vmodel = avalon.define("library", function(vm) {
     vm.widgets = widgets
     vm.activeIndex = 0
@@ -213,7 +215,7 @@ function init() {
 require(['jquery','domReady!'], function($) {
 			$.ajax({
 				type: "get",
-				url: 'http://172.16.122.50:3001/qadreportsurls',
+				url: tmpurl,
 				beforeSend: function(XMLHttpRequest){
 					avalon.log("start get");
 					//ShowLoading();

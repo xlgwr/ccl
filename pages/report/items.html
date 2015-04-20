@@ -12,12 +12,13 @@
 	 var curSubName = unescape(window.location.href.split("&")[0].split('=')[1]);	
 	 //avalon.log("DDDD:"+curSubName);
 	 var tmpurl='http://172.16.122.50:3001/qadreportsurls/'+curSubName
-	 var prefixReport='http://portal.cclmotors.com/QAD Reports/'+curSubName+'/';
+	 var prefixReport='http://portal.cclmotors.com/_layouts/15/ReportServer/RSViewerPage.aspx?rv:RelativeReportUrl=/QAD Reports/'+curSubName+'/';
+	 //var prefixReport='http://portal.cclmotors.com/QAD Reports/'+curSubName+'/';
 	 //avalon.log("AAAAAAAAAAAAAAAA:"+prefixReport);
 	 
        require(["../../bower_components/oniui/smartgrid/avalon.smartgrid",
 				"../../bower_components/oniui/switchdropdown/avalon.switchdropdown"], function() {
-			//var itemsdata=[];
+			var itemsdata=[];
 			avalon.log("start data grid");
 			//testdata
             function getDatas(number) {
@@ -40,16 +41,16 @@
                 // data[0].checkboxShow = false //当selectable.type为Checkbox时，设置checkboxShow为false会屏蔽掉列表行前面的选框，需要注意的是：设置checkboxShow为false，务必保证selected为false或者不存在selected的设置
                 return data
             }
-             
+            
             var vmitem=avalon.define("test", function(vm) {				
                 vm.$skipArray = ["opts"] //不需要转为监控属性的属性务必放到$skipArray数组中，减少开销提高性能
 				aurl: ''
 				vm.render = function(data) {
                     //data[0].checkboxShow = true
 					vmitem.aurl=prefixReport
-					vmitem.data=data
-					if(vmitem.data){					
-						avalon.vmodels.sg1.render(vmitem.data)
+					var sg1=avalon.vmodels.sg1
+					if(data){					
+						sg1.render(data)
 					}
                 }
 				vm.aclick = function(){
@@ -83,7 +84,7 @@
                         $X: function(vmId, field, index, cellValue, rowData) {//所有包装函数都会收到4个参数，分别是smartgrid组件对应vmodel的id，列标志(key)，列索引，列数据值
                             //avalon.log("arguments is : ")
                             //avalon.log(arguments)
-							var aurl=vmitem.aurl+"/"+cellValue
+							var aurl=vmitem.aurl+cellValue
 							//avalon.log(aurl)ms-click='aclick'
                             return "<a href='"+aurl+"' target='_blank'>"+cellValue+"</a>"
                         },
@@ -127,8 +128,8 @@
                             width: 100
                             //format: "$X" // 定义渲染数据的方法名
                         }
-                    ],
-                    data: []//getDatas(8)
+                    ]
+					//,data: itemsdata//getDatas(8)
                 }
             })
             avalon.scan()
@@ -143,7 +144,8 @@
 				},
 				success: function(data, status) {
 									
-					//avalon.log(data);		
+					//avalon.log(data);	
+					itemsdata=data;
                     vmitem.render(data)	
 					//var sg1 = avalon.vmodels.sg1
 					//sg1.render(data)
