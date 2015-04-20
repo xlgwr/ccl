@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 //Routes
 var routes={};
 
-routes.qadreportsurls=require('./route/qadreportsurls.js');
+routes.qadReportsUrls=require('./route/qadReportsUrls.js');
 //routes.reports=require('./route/reports.js');
 
 
@@ -26,16 +26,19 @@ app.all('*',function(req,res,next){
     res.set('Access-Control-Allow-Origin','http://localhost');
     res.set('Access-Control-Allow-Origin','http://localhost:8000');
     //res.set('Access-Control-Allow-Credentials', true);
-    res.set('Access-Control-Allow-Methods', 'GET');//, POST, DELETE, PUT');
+    //res.set('Access-Control-Allow-Methods', 'GET');//, POST, DELETE, PUT');
     //res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
     if ('OPTIONS' == req.method) return res.send(200);
     next();
 });
 
 //get all qadreportsurls
-app.get('/qadreportsurls',routes.qadreportsurls.list);
+//app.get('/','../../index.html');
+
+app.get('/qadReportsUrls',routes.qadReportsUrls.list);
+
 
 //get the qad sub reports
-//app.get('/qadreporturls/:name',route.qadreporturls.listAll);
+app.get('/qadReportsUrls/:name',routes.qadReportsUrls.listAll);
 
 console.log('CCL API is starting on port 3001');

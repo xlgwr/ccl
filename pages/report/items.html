@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <title>smartgrid demo</title>
+    <script src='../../bower_components/avalon/avalon.js'></script>
+</head>
+<body ms-controller="test">
+   <div ms-widget="smartgrid, sg1, opts" style="margin: 0 auto"></div>
+    <script>
+       var dd=require(["../../bower_components/oniui/smartgrid/avalon.smartgrid",
+				"../../bower_components/oniui/switchdropdown/avalon.switchdropdown"], function() {
+			var itemsdata=[];
+			//use jqery
+			require(['../../bower_components/jquery/dist/jquery.js','domReady!'], function($) {
+			
+			var curSubName = unescape(window.location.href.split("&")[0].split('=')[1]);	
+			//console.log("DDDD:"+curSubName);
+			var tmpurl='http://localhost:3001/qadreportsurls/'+curSubName
+			var prefixReport='http://portal.cclmotors.com/QAD Reports/'+curSubName+'/';
+			console.log("AAAAAAAAAAAAAAAA:"+prefixReport);
+			
+			$.ajax({
+				type: "get",
+				url: tmpurl,
+				beforeSend: function(XMLHttpRequest){
+					console.log("start get subname");
+				},
+				success: function(data, status) {
+									
+					//console.log(data);		
+					itemsdata=data;   
+					var sg1 = avalon.vmodels.sg1
+                    sg1.data = itemsdata//getDatas(500)
+                    sg1.render()				
+				},
+				error: function(){
+					console.log("error ajax 20");
+				}
+			});
+			});
+			///use jquery
+			console.log("start data grid");
+			//testdata
+            function getDatas(number) {
+                var data = []
+                for (var i = 0; i < number; i++) {
+                    data.push({
+                        description: "北上广经济型计划"+i,
+                        operate: i % 5 ? 0 : 1,
+                        buget: 5800,
+                        display: 13534646,
+                        click : 15932,
+                        clickRate : "50.21%",
+                        consume: 1135800,
+                        averageClickRate: 1.82,
+                        disable: i == 3 ? true : false,
+                        selected: false,
+                        checkboxShow: false
+                    })
+                }
+                // data[0].checkboxShow = false //当selectable.type为Checkbox时，设置checkboxShow为false会屏蔽掉列表行前面的选框，需要注意的是：设置checkboxShow为false，务必保证selected为false或者不存在selected的设置
+                return data
+            }
+             
+            avalon.define("test", function(vm) {				
+                vm.$skipArray = ["opts"] //不需要转为监控属性的属性务必放到$skipArray数组中，减少开销提高性能
+                vm.render = function() {
+                    var data = itemsdata
+                    //data[0].checkboxShow = true
+					if(data){					
+                    avalon.vmodels.sg1.render(data)
+					}
+                }
+				vm.aclick = function(){
+					var tampurl=this;
+					console.log('aaaaaaaaaaaaaaa:'+tampurl);
+					window.open(tampurl);
+					if(itemsdata){					
+							avalon.vmodels.sg1.render(data)
+					}
+					return;
+				}
+                vm.opts = {
+                    // 不希望组件的配置项被smartgrid监控，将其放到$skipArray数组中，添加其他组件同理
+                    $skipArray: ["switchdropdown", "dropdown", "pager"],
+                    //selectable: {
+                        //type: "Checkbox" //为表格添加选中行操作框,可以设置为"Checkbox"或者"Radio"
+                    //},
+					isAffix: true,
+					pageable: false,
+					//canChangePageSize: true,
+                    dropdownData: [{ // dropdown的数据信息
+                        name: "忙",
+                        value: "1"
+                    },{
+                        name: "不忙",
+                        value: "0"
+                    }],
+                    dropdown : {
+                        width: 100,
+                        listWidth: 100
+                    },
+                    htmlHelper: { // 渲染列数据的方法集合
+                        // 包装工资列的数据
+                        $X: function(vmId, field, index, cellValue, rowData) {//所有包装函数都会收到4个参数，分别是smartgrid组件对应vmodel的id，列标志(key)，列索引，列数据值
+                            //avalon.log("arguments is : ")
+                            //avalon.log(arguments)
+							var curSubNametmp = unescape(window.location.href.split("&")[0].split('=')[1]);	
+							var aurl="http://portal.cclmotors.com/QAD Reports/"+curSubNametmp+"/"+cellValue
+							//avalon.log(aurl)ms-click='aclick'
+                            return "<a href='"+aurl+"' target='_blank'>"+cellValue+"</a>"
+                        },
+                        // operate列包装成switchdropdown组件
+                        switchdropdown: function(vmId, field, index, cellValue, rowData, disable) {
+                            var openOption = cellValue == 0 ? '<option value="0" selected>启用</option>' : '<option value="0">启用</option>',
+                                pauseOption = cellValue == 1 ? '<option value="1" selected>暂停</option>' : '<option value="1">暂停</option>'
+ 
+                            return ['<select ms-widget="switchdropdown" rowindex="'+index+'" field="'+field+'"  vmId="'+vmId+'" '+ (disable ? "disabled": "") +'>', openOption, pauseOption, '</select>'].join('')
+                        },
+                        // busy列包装成dropdown组件
+                        dropdown: function(vmId, field, index, cellValue, rowData, disable) {
+                            var option = "<option ms-repeat='dropdownData' ms-attr-value='el.value' ms-attr-label='el.name' ms-selected='el.value == " + cellValue + "'></option>"
+                            return '<select ms-widget="dropdown" rowindex="' +index+'" field="'+field+'" vmId="'+vmId+'" ' + (disable ? "disabled" : "") + '>' + option + '</select>'
+                        }
+                    },
+                    columns: [
+                        {
+                            key : "value",
+                            name : "报表名",
+							sortable : true, //是否可排序
+                            isLock : true, //是否锁死列让其始终显示
+                            align: "left", //列的对象方式
+                            //defaultValue: "shirly", //列的默认值
+                            customClass: "ddd", //自定义此列单元格类
+                            toggle: false, 
+                            sortable : true,
+                            width: 100,
+                            format: "$X" // 定义渲染数据的方法名
+                        },
+						{
+                            key : "rdesc",
+                            name : "说明",
+							sortable : true, //是否可排序
+                            isLock : true, //是否锁死列让其始终显示
+                            align: "left", //列的对象方式
+                            defaultValue: "", //列的默认值
+                            customClass: "ddd", //自定义此列单元格类
+                            toggle: false, 
+                            sortable : true,
+                            width: 100
+                            //format: "$X" // 定义渲染数据的方法名
+                        }
+                    ],
+                    data: itemsdata//getDatas(8)
+                }
+            })
+            avalon.scan()
+
+        })
+    </script>
+</body>
+</html>

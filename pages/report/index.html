@@ -2,8 +2,6 @@
 var widgets = [];//["Business Development","Finance","Marketing","Orders","PE","Production","SCM","Warehouse"].sort()
 
 require(['jquery','domReady!'], function($) {
-				var dd=$('.footer').html();
-				console.log(dd);
 			$.ajax({
 				type: "get",
 				url: 'http://localhost:3001/qadreportsurls',
@@ -32,6 +30,10 @@ var vmodel = avalon.define("library", function(vm) {
     vm.frameContentHeight = 768 //默认iframe高度，过后通过iframeLoaded重新设置
     vm.changeActiveIndex = function(index, e) { //左侧边栏点击和页面初始化时，更新iframe的src以及页面url
         var name, prefix
+		if(!vm.widgets.length){
+			console.log('vm:'+vm.widgets + ' is null.');
+			return;
+		}
         if (index !== -1) { //左侧边栏点击
             if(vm.widgets[index]['value'] == "mmRouter") {
                 window.open("mmRouter/avalon.mmRouter.doc.html")
@@ -45,25 +47,25 @@ var vmodel = avalon.define("library", function(vm) {
                 name = curLocation.split(".")[1] //exp: datepicker
                 vm.activeIndex = vm.widgets.indexOf(name)
             } else { //exp：..../index.html
-                name = "Business Development"
+                name = "Business  Development"
             }
         }
-        prefix = name //处理一般情况
+        prefix = 'report';//name //处理一般情况
         switch (name) {
             case "coupledatepicker": //都在datepicker目录下
             case "daterangepicker":
-                prefix = "datepicker"
+                prefix = "report"
                 break
             case "html": //处理默认无后缀情况
-                name = "Business Development"
-                prefix = "Business Development"
+                name = "Business  Development"
+                prefix = "report"
                 break
         }
         if (window.location.href.indexOf("?ex") > -1 && index === -1) { //ex页面，exp:...avalon.oniui/index.html#avalon.datepicker.doc.html?ex=ex1
-            vm.widgetHref = prefix + "/report." + name + "." + window.location.href.split("example=")[1] + ".html" //寻找目录下示例页
+            vm.widgetHref = prefix + "/" + name + "." + window.location.href.split("example=")[1] + ".html" //寻找目录下示例页
         } else {
             var curLocation = window.location.href.split("#")[0]
-            vm.widgetHref = prefix + "/report." + name + ".html?ts=" + Date.parse(new Date()) //使页面刷新
+            vm.widgetHref = 'pages/' + prefix + "/items.html?sub="+name+"&ts=" + Date.parse(new Date()) //使页面刷新
             replaceLocation(curLocation + "#report." + name + ".html") //页面
         }
         updateHistory = true //需要更新入浏览历史
@@ -90,7 +92,7 @@ function init() {
     
     var iframe = document.getElementById("widgetFrame")
 	
-    vmodel.changeActiveIndex(-1) //页面初始化
+    //vmodel.changeActiveIndex(-1) //页面初始化
 
     if (iframe.attachEvent) { //响应iframe load事件
         iframe.attachEvent("onload", function() {
@@ -146,7 +148,7 @@ function init() {
             if (historyIndex === -1) {
                 scroll(0, 0) //第一次进入时页面到最顶端
             } else {
-                scroll(0, document.getElementById("avalon_oniui_banner").offsetHeight) //跨过banner
+                scroll(0, document.getElementById("subtitle").offsetHeight) //跨过banner
             }
             historyIndex += 1
             var newHistoryObj = {
@@ -173,7 +175,7 @@ function init() {
             } else {
                 movingfoward()
             }
-            scroll(0, document.getElementById("avalon_oniui_banner").offsetHeight) //跨过banner
+            scroll(0, document.getElementById("subtitle").offsetHeight) //跨过banner
         }
         updateHistory = false
     }
