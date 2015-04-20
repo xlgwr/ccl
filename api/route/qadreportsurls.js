@@ -32,8 +32,15 @@ exports.listAll=function(req,res) {
 	return res.send(400);
     }
 
-    var tmpsql="select distinct dirname as name,leafname as value,'' as rdesc from dbo.Docs where dirname = 'QAD Reports/"+subitem+"'";
+    var tmpsql='';
+    if(subitem!=='All'){
+	tmpsql="select distinct dirname as name,leafname as value,'' as rdesc from dbo.Docs where dirname = 'QAD Reports/"+subitem+"'";
+    }else{
+	tmpsql="select distinct dirname as name,leafname as value,'' as rdesc from dbo.Docs where dirname like 'QAD Reports/%'";
+    }
+    
     console.log(tmpsql);
+
     db.sql.connect(db.config,function(err){
 	//...error checks
 

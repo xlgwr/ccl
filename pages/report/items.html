@@ -6,7 +6,11 @@
     <script src='../../bower_components/avalon/avalon.js'></script>
 </head>
 <body ms-controller="test">
-	
+	<div>
+		<p>
+			<input ms-duplex="afind" data-duplex-event='change'><button ms-click="search">Search</button>
+		</P>
+	</div>
     <div ms-widget="smartgrid, sg1, opts" style="margin: 0 auto"></div>
     <script>
 	 var curSubName = unescape(window.location.href.split("&")[0].split('=')[1]);	
@@ -44,7 +48,8 @@
             
             var vmitem=avalon.define("test", function(vm) {				
                 vm.$skipArray = ["opts"] //不需要转为监控属性的属性务必放到$skipArray数组中，减少开销提高性能
-				aurl: ''
+				vm.aurl = ''
+				vm.afind = ''
 				vm.render = function(data) {
                     //data[0].checkboxShow = true
 					vmitem.aurl=prefixReport
@@ -53,6 +58,18 @@
 						sg1.render(data)
 					}
                 }
+				vm.search = function searchInArr(){
+				if(vm.afind){
+					var newitem=itemsdata.filter(function(value,index,ar){
+						//avalon.log(value)
+						if(value[index,'value'].toLowerCase().indexOf(vm.afind.toLowerCase()) !== -1)
+						return value;
+					});
+						vmitem.render(newitem);
+					}else{
+					vmitem.render(itemsdata);
+					}
+				}
 				vm.aclick = function(){
 					var tampurl=this;
 					avalon.log('aaaaaaaaaaaaaaa:'+tampurl);
@@ -132,7 +149,13 @@
 					//,data: itemsdata//getDatas(8)
                 }
             })
-            avalon.scan()
+			vmitem.$watch('afind',function(a) {
+				//avalon.log(a);
+				vmitem.search();
+				//avalon.log(newitem);
+			});
+			
+			avalon.scan()
 			 //use jqery
 			require(['../../bower_components/jquery/dist/jquery.js','domReady!'], function($) {
 									

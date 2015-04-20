@@ -221,7 +221,7 @@ require(['jquery','domReady!'], function($) {
 					//ShowLoading();
 				},
 				success: function(data, status) {
-				
+					data.push({"name":"All","value":"All"});
 					vmodel.widgets=data;
 					vmodel.changeActiveIndex(-1);
 					//avalon.log(vmodel.widgets);
