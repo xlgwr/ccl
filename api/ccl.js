@@ -25,6 +25,7 @@ routes.qadReportsUrls=require('./route/qadReportsUrls.js');
 app.all('*',function(req,res,next){
     res.set('Access-Control-Allow-Origin','http://localhost');
     res.set('Access-Control-Allow-Origin','http://localhost:8000');
+    res.set('Access-Control-Allow-Origin','http://172.16.122.50:8000');
     //res.set('Access-Control-Allow-Credentials', true);
     //res.set('Access-Control-Allow-Methods', 'GET');//, POST, DELETE, PUT');
     //res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
