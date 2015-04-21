@@ -19,7 +19,7 @@
 	 //avalon.log("DDDD:"+curSubName);
 	 //avalon.log("3item:"+config.acaoIp);
 	 var tmpurl=config.apiIp+'/qadreportsurls/'+curSubName
-	 var prefixReport='http://portal.cclmotors.com/_layouts/15/ReportServer/RSViewerPage.aspx?rv:RelativeReportUrl=/QAD Reports/'+curSubName+'/';
+	 var prefixReport='http://portal.cclmotors.com/_layouts/15/ReportServer/RSViewerPage.aspx?rv:RelativeReportUrl=/';
 	 //var prefixReport='http://portal.cclmotors.com/QAD Reports/'+curSubName+'/';
 	 //avalon.log("AAAAAAAAAAAAAAAA:"+prefixReport);
 	 
@@ -53,9 +53,11 @@
                 vm.$skipArray = ["opts"] //不需要转为监控属性的属性务必放到$skipArray数组中，减少开销提高性能
 				vm.aurl = ''
 				vm.afind = ''
+				vm.curdata = []
 				vm.render = function(data) {
                     //data[0].checkboxShow = true
 					vmitem.aurl=prefixReport
+					vmitem.curdata=data
 					var sg1=avalon.vmodels.sg1
 					if(data){					
 						sg1.render(data)
@@ -106,8 +108,9 @@
                         $X: function(vmId, field, index, cellValue, rowData) {//所有包装函数都会收到4个参数，分别是smartgrid组件对应vmodel的id，列标志(key)，列索引，列数据值
                             //avalon.log("arguments is : ")
                             //avalon.log(arguments)
-							var aurl=vmitem.aurl+cellValue
+							var aurl=vmitem.aurl+rowData['name']+'/'+cellValue
 							//avalon.log(aurl)ms-click='aclick'
+							//avalon.log(aurl);
                             return "<a href='"+aurl+"' target='_blank'>"+cellValue+"</a>"
                         },
                         // operate列包装成switchdropdown组件

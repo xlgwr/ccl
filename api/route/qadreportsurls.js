@@ -36,11 +36,11 @@ exports.listAll=function(req,res) {
     if(subitem!=='All'){
 	tmpsql="select distinct a.dirname as name,a.leafname as value,isnull(b.tp_ColumnSet.value('nvarchar7[1]','nvarchar(100)'),'') as rdesc from dbo.Docs a "
 	tmpsql=tmpsql+" left join dbo.UserData b on (a.listid=b.tp_ListId and a.DoclibRowId=b.tp_id) "
-	tmpsql=tmpsql+" where a.dirname = 'QAD Reports/"+subitem+"'";
+	tmpsql=tmpsql+" where a.dirname = 'QAD Reports/"+subitem+"' and a.Extension='rdl'";
     }else{
 	tmpsql="select distinct a.dirname as name,a.leafname as value,isnull(b.tp_ColumnSet.value('nvarchar7[1]','nvarchar(100)'),'') as rdesc from dbo.Docs a "
 	tmpsql=tmpsql+" left join dbo.UserData b on (a.listid=b.tp_ListId and a.DoclibRowId=b.tp_id) "
-	tmpsql=tmpsql+" where a.dirname like 'QAD Reports/%'";
+	tmpsql=tmpsql+" where a.dirname like 'QAD Reports/%' and a.Extension='rdl'";
     }
     
     console.log(tmpsql);
