@@ -112,7 +112,6 @@
 						}).done(function(res) {
 							//avalon.log(res);
 							vmitem.state.setSucc(res);
-							itemsdata=res;
 							vmitem.render(res);
 						});
 				}
@@ -120,10 +119,11 @@
 				vm.render = function(data) {
                     //data[0].checkboxShow = true
 					vmitem.aurl=prefixReport
-					vmitem.none='block'
-					vmitem.curdata=data
-					var sg1=avalon.vmodels.sg1
-					if(data){	
+					if(data){						
+						vmitem.none='block'
+						vmitem.curdata=data
+						itemsdata=data;
+						var sg1=avalon.vmodels.sg1						
 						//avalon.log("render:data");
 						sg1.render(data)
 					}

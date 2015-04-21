@@ -35,6 +35,7 @@ var vmodel = avalon.define("library", function(vm) {
 						}).done(function(res) {
 							//avalon.log(res);
 							vmodel.state.setSucc(res);
+							res.push({"name":"All","value":"All"})
 							vmodel.widgets=res;
 							vmodel.changeActiveIndex(-1);
 						});
