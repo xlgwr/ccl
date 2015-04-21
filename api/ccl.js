@@ -38,10 +38,14 @@ app.all('*',function(req,res,next){
 //get all qadreportsurls
 //app.get('/','../../index.html');
 
-app.get('/qadReportsUrls',routes.qadReportsUrls.list);
+//init qad from redis
+app.get('/initRedis',routes.qadReportsUrls.initRedis);
 
+//get qad report head
+app.get('/qadReportsUrls',routes.qadReportsUrls.list);
 
 //get the qad sub reports
 app.get('/qadReportsUrls/:name',routes.qadReportsUrls.listAll);
+
 
 console.log('CCL API is starting on port 3001');

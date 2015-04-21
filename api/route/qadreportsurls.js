@@ -1,11 +1,37 @@
 var db=require('../config/mssql_database.js');
 var dbredis=require('../config/redis_database.js');
 
-var publicFields = 'dirname leafname';
+var redisClient=dbredis.redisClient;
+var getQadReportName="QadReport"
 
+exports.initRedis=function(req,res){
+    //init 
+    db.sql.connect(db.config,function(err){
+		//...error checks
+	var request = new db.sql.Request();
+	request.query("select distinct dirname as name,leafname as value from dbo.Docs where dirname = 'QAD Reports' and leafname not in('Data Source','Forms')",function(err,recordset){
+	    //console.dir(recordset);
+	    if (err) {
+		console.log(err);
+		db.sql.close();
+		return res.send(400);
+	    };
+	    db.sql.close();
+	    redisClient.set(getQadReportName,JSON.stringify(recordset));
+
+	    for(var i = 0; i < recordset.length; i++) {
+		var tmpsubname=getQadReportName+recordset[i]["value"];
+		console.log(tmpsubname);
+		redisClient.set(tmpsubname,'');
+	    }
+	    console.log("Init Redis Ok.");
+	    res.json(200,recordset);
+	});
+	
+    });//end db
+}
 exports.list=function(req,res) {
-    var redisClient=dbredis.redisClient;
-    redisClient.get("qadreport",function(err,reply){
+    redisClient.get(getQadReportName,function(err,reply){
 	if (err) {
 	    console.log(err);
 	}
@@ -32,7 +58,7 @@ exports.list=function(req,res) {
 				      return res.send(400);
 				  };
 				  db.sql.close();
-				  redisClient.set("qadreport",JSON.stringify(recordset));
+				  redisClient.set(getQadReportName,JSON.stringify(recordset));
 				  res.json(200,recordset);
 			      });
 	
@@ -52,9 +78,8 @@ exports.listAll=function(req,res) {
     if(subitem===''){
 	return res.send(400);
     }
-    var getRedisName="QadReport"+subitem;
+    var getRedisName=getQadReportName+subitem;
 
-    var redisClient=dbredis.redisClient;
     redisClient.get(getRedisName,function(err,reply){
 	if (err) {
 	    console.log(err);
