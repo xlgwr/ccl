@@ -50,7 +50,7 @@
 	 //avalon.log("3item:"+config.acaoIp);
 	 var tmpurl=config.apiIp+'/qadreportsurls/'+curSubName
 	 var prefixReport='http://portal.cclmotors.com/_layouts/15/ReportServer/RSViewerPage.aspx?rv:RelativeReportUrl=/';
-	 //var prefixReport='http://portal.cclmotors.com/QAD Reports/'+curSubName+'/';
+	 //var prefixReport='http://portal.cclmotors.com/';
 	 //avalon.log("AAAAAAAAAAAAAAAA:"+prefixReport);
 	 
        require(["../../bower_components/oniui/smartgrid/avalon.smartgrid",
@@ -169,7 +169,7 @@
                         $X: function(vmId, field, index, cellValue, rowData) {//所有包装函数都会收到4个参数，分别是smartgrid组件对应vmodel的id，列标志(key)，列索引，列数据值
                             //avalon.log("arguments is : ")
                             //avalon.log(arguments)
-							var aurl=vmitem.aurl+rowData['name']+'/'+cellValue
+							var aurl=vmitem.aurl+escape(rowData['name']+'/'+cellValue)
 							//avalon.log(aurl)ms-click='aclick'
 							//avalon.log(aurl);
                             return "<a href='"+aurl+"' target='_blank'>"+cellValue+"</a>"
