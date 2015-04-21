@@ -52,22 +52,23 @@ exports.listAll=function(req,res) {
     if(subitem===''){
 	return res.send(400);
     }
-    
+    var getRedisName="QadReport"+subitem;
+
     var redisClient=dbredis.redisClient;
-    redisClient.get(subitem,function(err,reply){
+    redisClient.get(getRedisName,function(err,reply){
 	if (err) {
 	    console.log(err);
 	}
 	//console.log("hasvalue:"+reply);	    
 	if (reply) {
 	    //console.log(JSON.parse(reply));
-	    console.log("listAll get from redis:"+subitem);
+	    console.log("listAll get from redis:"+getRedisName);
 	    res.json(200,JSON.parse(reply));
 	}else{
 	    //log
 	   // console.log("Null:"+reply);
 	    //getfrom db
-    	    console.log("listAll get from db:"+subitem);
+    	    console.log("listAll get from db:"+getRedisName);
 	    var tmpsql='';
 	    if(subitem!=='All'){
 		tmpsql="select distinct a.dirname as name,a.leafname as value,isnull(b.tp_ColumnSet.value('nvarchar7[1]','nvarchar(100)'),'') as rdesc from dbo.Docs a "
@@ -92,7 +93,7 @@ exports.listAll=function(req,res) {
 				      return res.send(400);
 				  };
 				  db.sql.close();
-				  redisClient.set(subitem,JSON.stringify(recordset));
+				  redisClient.set(getRedisName,JSON.stringify(recordset));
 				  res.json(200,recordset);
 			      });
 	
