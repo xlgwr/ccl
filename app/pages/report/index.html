@@ -36,7 +36,10 @@ var vmodel = avalon.define("library", function(vm) {
 							//avalon.log(res);
 							vmodel.state.setSucc(res);
 							res.push({"name":"All","value":"All"})
-							vmodel.widgets=res;
+							vmodel.widgets=res.sort(function(a,b){
+								//console.log(a['value'].substring(0,1)+','+b['value'].substring(0,1));
+							    return a['value'].substring(0,1)>b['value'].substring(0,1);								
+							});
 							vmodel.changeActiveIndex(-1);
 						});
 	}
@@ -59,7 +62,7 @@ var vmodel = avalon.define("library", function(vm) {
                 name = curLocation.split(".")[1] //exp: datepicker
                 vm.activeIndex = vm.widgets.indexOf(name)
             } else { //exp：..../index.html
-                name = "Business  Development"
+                name = "All"//Business  Development
             }
         }
         prefix = 'report';//name //处理一般情况
@@ -69,7 +72,7 @@ var vmodel = avalon.define("library", function(vm) {
                 prefix = "report"
                 break
             case "html": //处理默认无后缀情况
-                name = "Business  Development"
+                name = "All"
                 prefix = "report"
                 break
         }
