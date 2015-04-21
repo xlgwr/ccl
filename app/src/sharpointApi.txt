@@ -1,0 +1,18 @@
+
+http://[sharepointsite]/_api
+任何 REST 请求的基础。_api 虚拟目录映射到 client.svc 中的调用，其中可以使用客户端对象模型。
+GET
+http://[sharepointsite]/_api/web/title
+检索当前网页的标题。
+GET
+http://[sharepointsite]/_api/lists
+检索一个网站上的所有列表。
+GET
+http://[sharepointsite]/_api/lists/getbytitle('listname')
+检索指定列表上的元数据。
+GET
+http://[sharepointsite]/_api/lists/getbytitle('listname')/items
+检索一个指定列表中的列表项。
+GET
+http://[sharepointsite]/_api/lists/getbytitle('listname')?select=Title
+检索一个特定列表的标题。

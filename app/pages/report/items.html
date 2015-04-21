@@ -17,7 +17,7 @@
     <script>
 	 var curSubName = unescape(window.location.href.split("&")[0].split('=')[1]);	
 	 //avalon.log("DDDD:"+curSubName);
-	 avalon.log("3item:"+config.acaoIp);
+	 //avalon.log("3item:"+config.acaoIp);
 	 var tmpurl=config.apiIp+'/qadreportsurls/'+curSubName
 	 var prefixReport='http://portal.cclmotors.com/_layouts/15/ReportServer/RSViewerPage.aspx?rv:RelativeReportUrl=/QAD Reports/'+curSubName+'/';
 	 //var prefixReport='http://portal.cclmotors.com/QAD Reports/'+curSubName+'/';
@@ -65,7 +65,8 @@
 				if(vm.afind){
 					var newitem=itemsdata.filter(function(value,index,ar){
 						//avalon.log(value)
-						if(value[index,'value'].toLowerCase().indexOf(vm.afind.toLowerCase()) !== -1)
+						if(value[index,'value'].toLowerCase().indexOf(vm.afind.toLowerCase()) !== -1 || 
+						   value[index,'rdesc'].toLowerCase().indexOf(vm.afind.toLowerCase()) !== -1)
 						return value;
 					});
 						vmitem.render(newitem);
@@ -87,6 +88,7 @@
                     //},
 					isAffix: true,
 					pageable: false,
+					//showLoading: true,
 					//canChangePageSize: true,
                     dropdownData: [{ // dropdown的数据信息
                         name: "忙",
@@ -145,7 +147,7 @@
                             customClass: "ddd", //自定义此列单元格类
                             toggle: false, 
                             sortable : true,
-                            width: 100
+                            width: 200
                             //format: "$X" // 定义渲染数据的方法名
                         }
                     ]
