@@ -5,13 +5,42 @@
     <title>smartgrid demo</title>
     <script src='../../bower_components/avalon/avalon.js'></script>	
     <script src='../../config/config.js'></script>
-	
+	<style>
+	 div.search {
+		right: 0;
+		padding: 0 0 0 10px;
+		line-height: 20px;
+		width: 250px;
+		border: 1px solid #547c73;
+		border-radius: 3px;
+		}
+	div.search input {
+			width: 210px;
+			height: 20px;
+			padding: 5px 0;
+			margin: 0;
+			border: 0 none;
+			line-height: 20px;
+			outline: none;
+			font-family: inherit;
+			vertical-align: middle;
+	 }
+	 div.search a {
+		display: inline-block;
+			width: 30px;
+			height: 30px;
+			background: url(/vendor/style/searchIcon.png) no-repeat;
+			vertical-align: middle;
+	}
+}
+	</style>
 </head>
 <body ms-controller="test">
-	<div>
-		<p>
-			<input ms-duplex="afind" data-duplex-event='change'><button ms-click="search">Search</button>
-		</P>
+	<div class='search'>
+			<input type="text" placeholder="报表名或中文关键字..." 
+				ms-duplex="afind" 
+				data-duplex-event='change'>
+				<a href="javascript:void(0);" ms-click="search"></a>			
 	</div>
     <div ms-widget="smartgrid, sg1, opts" style="margin: 0 auto"></div>
     <script>
