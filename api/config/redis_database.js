@@ -1,5 +1,5 @@
 var redis = require('redis');
-var redisClient = redis.createClient(6379);
+var redisClient = redis.createClient(6379);//redis.createClient() = redis.createClient(6379, '127.0.0.1', {})
 
 redisClient.on('error',function(err) {
     console.log('Error' + err);

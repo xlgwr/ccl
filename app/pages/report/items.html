@@ -52,17 +52,19 @@
 	 var prefixReport='http://portal.cclmotors.com/_layouts/15/ReportServer/RSViewerPage.aspx?rv:RelativeReportUrl=/';
 	 //var prefixReport='http://portal.cclmotors.com/';
 	 //avalon.log("AAAAAAAAAAAAAAAA:"+prefixReport);
-	 
-       require(["../../bower_components/oniui/smartgrid/avalon.smartgrid",
-				"../../bower_components/oniui/switchdropdown/avalon.switchdropdown"], function() {
+	 //,"../../bower_components/oniui/switchdropdown/avalon.switchdropdown"
+      require(["../../bower_components/mm-request/public/mmRequest",
+				"../../bower_components/oniui/smartgrid/avalon.smartgrid",'domReady!'], function() {
 			var itemsdata=[];
 			avalon.log("start data grid");
+			//					
+			
 			//testdata
             function getDatas(number) {
                 var data = []
                 for (var i = 0; i < number; i++) {
                     data.push({
-                        description: "北上广经济型计划"+i,
+                        description: "demo"+i,
                         operate: i % 5 ? 0 : 1,
                         buget: 5800,
                         display: 13534646,
@@ -85,6 +87,36 @@
 				vm.afind = ''
 				vm.curdata = []
 				vm.none='none'
+				vm.state = {}
+				// ajax
+				vm.state={
+						text: '无请求',
+						setSend: function(sendType) {
+								vmitem.state.text = sendType + ' 请求中...';
+						},
+						setSucc: function(data) {
+								vmitem.state.text = '请求成功！请求类型：' + data.sendType;
+						}
+				}
+				vm.ajaxGetJSON=function() {
+					var sendType = 'avalon.ajax';
+						vmitem.state.setSend(sendType);
+
+						avalon.ajax({
+							url: tmpurl,
+							data: {
+								sendType: sendType
+							},
+							dataType: 'json',
+							cache: false
+						}).done(function(res) {
+							//avalon.log(res);
+							vmitem.state.setSucc(res);
+							itemsdata=res;
+							vmitem.render(res);
+						});
+				}
+				//end ajax
 				vm.render = function(data) {
                     //data[0].checkboxShow = true
 					vmitem.aurl=prefixReport
@@ -101,7 +133,7 @@
 						var currKey = 0,
 							e = e || event;
 						if (e.keyCode == 13) {
-							searchInArr(e);
+							vmitem.search(e);
 						}
 					})
 				}
@@ -239,31 +271,32 @@
 				vmitem.search();
 				//avalon.log(newitem);
 			});
+			// ajax
+			vmitem.ajaxGetJSON();
 			 //use jqery
-			require(['../../bower_components/jquery/dist/jquery.js','domReady!'], function($) {
+			//require(['../../bower_components/jquery/dist/jquery.js','domReady!'], function($) {
 									
-			$.ajax({
-				type: "get",
-				url: tmpurl,
-				beforeSend: function(XMLHttpRequest){
-					avalon.log("start get subname");
-				},
-				success: function(data, status) {
+			//$.ajax({
+			//	type: "get",
+				//url: tmpurl,
+				//beforeSend: function(XMLHttpRequest){
+					// avalon.log("start get subname");
+				// },
+				// success: function(data, status) {
 									
-					//avalon.log(data);	
-					itemsdata=data;
-                    vmitem.render(data)	
-					//var sg1 = avalon.vmodels.sg1
-					//sg1.render(data)
-				    //avalon.log(vmitem.aurl)
-				},
-				error: function(){
-					avalon.log("error ajax 20");
-				}
-			});
-			});
-			///use jquery
-			
+					// //avalon.log(data);	
+					// itemsdata=data;
+                    // vmitem.render(data)	
+					// //var sg1 = avalon.vmodels.sg1
+					// //sg1.render(data)
+				    // //avalon.log(vmitem.aurl)
+				// },
+				// error: function(){
+					// avalon.log("error ajax 20");
+				// }
+			// });
+			// });
+			// ///use jquery
 			avalon.scan()
         })
     </script>
