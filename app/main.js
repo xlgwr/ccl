@@ -1,12 +1,13 @@
 require.config({
-	baseUrl:'',
+	baseUrl:'bower_components',
 	paths:{
-		jquery: './bower_components/jquery/dist/jquery',
-		avalon: "./bower_components/avalon/avalon.shim",//必须修改源码 Or shim，禁用自带加载器，或直接删提AMD加载器模块
-        text: './bower_components/text/text',
-        domReady: './bower_components/domReady/domReady',
-        css: './bower_components/require-css/css'
-		//aaa: './modules/aaa/aaa'
+		jquery: './jquery/dist/jquery',
+		avalon: "./avalon/avalon.shim",//必须修改源码 Or shim，禁用自带加载器，或直接删提AMD加载器模块
+        text: './text/text',
+        domReady: './domReady/domReady',
+        css: './require-css/css',
+		aaa: '/modules/aaa/aaa'
+		//oniui	
     },
     priority: ['text', 'css'],
     shim: {
@@ -32,15 +33,11 @@ require(['avalon', "domReady!"], function() {//第二块，添加根VM（处理�
 		
     })
 	pages.$watch('page',function(a,b){
-			avalon.log("page:change:"+a+":"+b);
+			//avalon.log("page:change:"+a+":"+b);
 	})
-    avalon.scan(document.body)
-	require(['modules/aaa/aaa'], function() {//第三块，加载其他模块
-        avalon.log("加载其他完毕aaa")
-		// require(["text!./aaa.html"],function(a){
-			 // avalon.log(a);
-			 // avalon.log("load a");
-		// });
-		//avalon.log("加载其他完毕aaa2")
-	});
+    //avalon.scan(document.body)	
+	require(['aaa'], function() {//第三块，加载其他模块
+        avalon.log("加载其他完毕aaa1");		
+	});		
+    avalon.scan();
 });
