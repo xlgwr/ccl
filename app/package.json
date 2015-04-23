@@ -1,0 +1,12 @@
+{
+  "volo": {
+    "dependencies": {
+      "text": "github:requirejs/text/2.0.14",
+      "require-css": "github:guybedford/require-css/0.1.8"
+    }
+  },
+  "dependencies": {
+    "requirejs": "^2.1.17",
+    "volo": "^0.3.4"
+  }
+}
