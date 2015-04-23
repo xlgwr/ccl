@@ -21,7 +21,7 @@ define(["avalon", "text!./aaa.html","css!./aaa.css"], function(avalon, aaa) {
                 }
                 return data
     };
-	require(["./oniui/smartgrid/avalon.smartgrid",+
+	require(["./oniui/smartgrid/avalon.smartgrid",
 			"./oniui/button/avalon.button",
 			"./oniui/dialog/avalon.dialog"], function(vm){
 		//start
@@ -80,7 +80,7 @@ define(["avalon", "text!./aaa.html","css!./aaa.css"], function(avalon, aaa) {
 		avalon.log("UserName:"+model.username);
 	});
 	
-    avalon.vmodels.root.page = "aaa"
+    avalon.vmodels.page.pagesrc = "aaa"
 	avalon.scan();	
 	
 	});	
