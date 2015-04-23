@@ -16,16 +16,16 @@
 		<script src='../../config/config.js'></script>		
         <script>
 		 avalon.log("1index:"+config.acaoIp);
-		 // avalon.config({
-				// paths:{
-					// jquery: "../../bower_components/jquery/dist/jquery.js"
-				// },
-				// shim:{
-					// jquery:{
-					// exports: "jQuery"
-					// }
-				// }
-		  // });			
+		 avalon.config({
+				paths:{
+					jquery: "../../bower_components/jquery/dist/jquery.js"
+				},
+				shim:{
+					jquery:{
+					exports: "jQuery"
+					}
+				}
+		  });			
           var page = avalon.define("pages", function(vm) {
             vm.pages = [{
                     title: "报表中心",
@@ -155,7 +155,7 @@
         <div class="header">
             <div class="fix">
                 <div id="nav" class="nav">
-                    <a class="logo" ms-href='{{ location.href.indexOf("localhost") !== -1 ? "index.html": "index.html"}}'></a>
+                    <a class="logo" ms-href='{{ location.href.indexOf("localhost") !== -1 ? "index.html#" : "index.html#"+page.pages[0].href}}'></a>
                     <ul id="oniui_component_list">
                         <li ms-repeat-page="pages" ms-class="active: $index == activeIndex" ms-click="changeActiveIndex($index)">
                             <a ms-href="#{{page.href}}" >{{page.title | html}}</a>
@@ -180,7 +180,7 @@
         </div>
 
         <div class="footer">
-            <p>© 2015 捷和电机集团有限公司 版权所有</>
+            <p>© 2015 捷和电机集团有限公司 版权所有</P>
         </div>
 
     </body>

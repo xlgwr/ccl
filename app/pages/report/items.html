@@ -39,9 +39,9 @@
 <body ms-controller="test">
 	<div class='search'>
 			<input type="text" placeholder="报表名或说明..." 
-				ms-duplex="afind" 
-				ms-focus="searchFocus">
-				<a href="javascript:void(0);" ms-click="search"></a>			
+				ms-duplex="afind"> <!-- ms-focus="searchFocus" -->
+				
+			<a href="javascript:void(0);" ms-click="search"></a>			
 	</div>
     <div ms-widget="smartgrid, sg1, opts" style="margin: 0 auto" ms-css-display="none"></div>
     <script>

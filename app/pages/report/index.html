@@ -5,7 +5,7 @@ var updateHistory = false //将此url更新入浏览历史
 var tmpurl=config.apiIp+'/qadreportsurls/' //ajax url
 
 //avalon.log("2:"+config.apiIp);
- var dd=require(["../../bower_components/mm-request/public/mmRequest",'domReady!'], function() {
+ //var dd=require(["../../bower_components/mm-request/public/mmRequest",'domReady!'], function() {
 var vmodel = avalon.define("library", function(vm) {
     vm.widgets = widgets
     vm.activeIndex = 0
@@ -36,10 +36,11 @@ var vmodel = avalon.define("library", function(vm) {
 							//avalon.log(res);
 							vmodel.state.setSucc(res);
 							res.push({"name":"All","value":"All"})
-							vmodel.widgets=res.sort(function(a,b){
-								//console.log(a['value'].substring(0,1)+','+b['value'].substring(0,1));
-							    return a['value'].substring(0,1)>b['value'].substring(0,1);								
-							});
+							// vmodel.widgets=res.sort(function(a,b){
+								// //console.log(a['value'].substring(0,1)+','+b['value'].substring(0,1));
+							    // return a['value'].substring(0,1)>b['value'].substring(0,1);								
+							// });
+							vmodel.widgets=res
 							vmodel.changeActiveIndex(-1);
 						});
 	}
@@ -62,7 +63,7 @@ var vmodel = avalon.define("library", function(vm) {
                 name = curLocation.split(".")[1] //exp: datepicker
                 vm.activeIndex = vm.widgets.indexOf(name)
             } else { //exp：..../index.html
-                name = "All"//Business  Development
+                name = "Business  Development"//Business  Development
             }
         }
         prefix = 'report';//name //处理一般情况
@@ -72,7 +73,7 @@ var vmodel = avalon.define("library", function(vm) {
                 prefix = "report"
                 break
             case "html": //处理默认无后缀情况
-                name = "All"
+                name = "Business  Development"
                 prefix = "report"
                 break
         }
@@ -100,13 +101,13 @@ function init() {
     var historys = [] //浏览历史
     var historyIndex = -1
     if(getCookie("historys") !== ""){
-        historys = JSON.parse(getCookie("historys"))
+        historys = avalon.parseJSON(getCookie("historys"))
         historyIndex = historys.length-2
     }
     
     var iframe = document.getElementById("widgetFrame")
 	
-	vmodel.ajaxGetJSON();
+	//vmodel.ajaxGetJSON();
     //vmodel.changeActiveIndex(-1) //页面初始化
 
     if (iframe.attachEvent) { //响应iframe load事件
@@ -247,28 +248,28 @@ function init() {
     }
 }
 
-// require(['jquery','domReady!'], function($) {
-			// $.ajax({
-				// type: "get",
-				// url: tmpurl,
-				// beforeSend: function(XMLHttpRequest){
-					// avalon.log("start get");
-					// ShowLoading();
-				// },
-				// success: function(data, status) {
-					// data.push({"name":"All","value":"All"});
-					// vmodel.widgets=data;
-					// vmodel.changeActiveIndex(-1);
-					// avalon.log(vmodel.widgets);
+require(['../../bower_components/jquery/dist/jquery','domReady!'], function($) {
+			$.ajax({
+				type: "get",
+				url: tmpurl,
+				beforeSend: function(XMLHttpRequest){
+					avalon.log("start get");
+					//ShowLoading();
+				},
+				success: function(data, status) {
+					data.push({"name":"All","value":"All"});
+					vmodel.widgets=data;
+					vmodel.changeActiveIndex(-1);
+					avalon.log(vmodel.widgets);
 					       
-				// },
-				// error: function(){
-					// avalon.log("error ajax 20");
-				// }
-			// });
-// });
-avalon.scan();
+				},
+				error: function(err){
+					avalon.log("error ajax 20:"+err);
+				}
+			});
 });
+//avalon.scan();
+//});
 </script>
 <table class="oniui-content" width="100%" ms-controller="library">
     <tr>
