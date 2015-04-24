@@ -98,11 +98,20 @@ require(['avalon', 'config', 'domReady!',
 	    page.$watch('pagesrc', function (a, b) {
 	        avalon.log("page:change:" + a + ":" + b);
 	    })
-	   // avalon.scan(document.body)
+	    // avalon.scan(document.body)
 
 	    require(['aaa'], function () {//第三块，加载其他模块
 	        avalon.log("加载其他完毕aaa1");
 	    });
+
+
+	    function setFocus() {
+	        var afind = document.getElementById('afind')
+	        afind.focus();
+	        avalon.log("dd:" + afind);
+	    }
+	    avalon.bind(window, "onload", setFocus);
+
 
 	    avalon.scan();
 	});

@@ -94,7 +94,9 @@ function replaceLocation(location) {
         window.location.replace(location)
     }
 }
-
+function setFocus() {
+    document.getElementById('afind').focus();
+}  
 avalon.bind(window, "load", init) //等待iframe加载
 
 function init() {

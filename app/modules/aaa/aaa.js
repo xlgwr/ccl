@@ -52,7 +52,7 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			        vm.none = 'none';
 			        //widgets
 			        vm.widgets = widgets
-			        vm.aname = "";
+			        vm.aname = "Business  Development";
 			        vm.aprefix = "";
 			        vm.activeIndex = 0
 			        vm.widgetHref = ""
@@ -65,7 +65,10 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			        vm.afind = ''
 			        vm.curdata = []
 			        vm.none = 'none'
-
+			        //focus
+			        vm.focus = function () {
+			            avalon.log("this focus。");
+			        }
 			        //ajax for left menu
 			        vm.state = {
 			            text: '无请求',
@@ -97,6 +100,7 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			                // });
 			                vmodel.widgets = res
 			                vmodel.changeActiveIndex(-1);
+			                vmodel.ajaxGetJSONSub();
 			            });
 			        }
 			        vm.changeActiveIndex = function (index, e) { //左侧边栏点击和页面初始化时，更新iframe的src以及页面url
@@ -117,7 +121,7 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			                    vm.aname = curLocation.split(".")[1] //exp: datepicker
 			                    vm.activeIndex = vm.widgets.indexOf(name)
 			                } else { //exp：..../index.html
-			                    name = "Business  Development"//Business  Development
+			                    vm.aname = "Business  Development"//Business  Development
 			                }
 			            }
 			            vm.aprefix = 'report'; //name //处理一般情况
@@ -137,7 +141,7 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			                var curLocation = window.location.href.split("#")[0]
 			                vm.widgetHref = 'pages/' + vm.aprefix + "/items.html?sub=" + name + "&ts=" + Date.parse(new Date()) //使页面刷新
 			                replaceLocation(curLocation + "#report." + vm.aname + ".html") //页面
-			                
+
 			            }
 			            updateHistory = true //需要更新入浏览历史
 			        }
@@ -150,7 +154,7 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			            vmodel.state.setSend(sendType);
 
 			            avalon.ajax({
-			                url: tmpurl+vmodel.aname,
+			                url: tmpurl + vmodel.aname,
 			                data: {
 			                    sendType: sendType
 			                },
@@ -161,6 +165,7 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			                vm.itemsdata = res;
 			                vmodel.state.setSucc(res);
 			                vmodel.render(res);
+
 			            });
 			        }
 			        //end ajax
@@ -325,11 +330,11 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			    });
 
 			    avalon.vmodels.page.pagesrc = "aaa"
-
 			    avalon.log("load: init");
 			    vmodel.ajaxGetJSON();
-
+			    
 			    avalon.scan();
+
 			});
     ///////////////////////end require
 
