@@ -1,27 +1,51 @@
-	 div.search {		
-		left: 0;
-		padding: 0 0 0 10px;
-		line-height: 20px;
-		width: 250px;
-		border: 1px solid #547c73;
-		border-radius: 3px;
-		z-index: 999;
-		}
-	div.search input {
-			width: 210px;
-			height: 20px;
-			padding: 5px 0;
-			margin: 0;
-			border: 0 none;
-			line-height: 20px;
-			outline: none;
-			font-family: inherit;
-			vertical-align: middle;
-	 }
-	 div.search a {
-		display: inline-block;
-			width: 30px;
-			height: 30px;
-			background: url(/vendor/style/searchIcon.png) no-repeat;
-			vertical-align: middle;
-	}
+div.search
+{
+    left: 0;
+    margin: 5px;
+    padding: 0 0 0 10px;
+    line-height: 20px;
+    width: 250px;
+    border: 1px solid #547c73;
+    border-radius: 3px;
+    z-index: 999;
+}
+div.search input
+{
+    width: 210px;
+    height: 20px;
+    padding: 5px 0;
+    margin: 0;
+    border: 0 none;
+    line-height: 20px;
+    outline: none;
+    font-family: inherit;
+    vertical-align: middle;
+}
+div.search a
+{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url(/vendor/style/searchIcon.png) no-repeat;
+    vertical-align: middle;
+}
+#ui-list
+{
+    width: 200px;
+}
+#ui-list a
+{
+    width: 200px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+#ui-list a.active
+{
+  background-color: rgba(0,75,141,0.6);
+}
+#ui-right
+{
+    overflow: auto;
+    margin: 5px auto 5px 5px;
+}

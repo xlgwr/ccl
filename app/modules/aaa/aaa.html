@@ -1,31 +1,22 @@
 <table class="oniui-content" width="100%" ms-controller="aaa">
     <tr>
-        <td valign="top" style="width:200px;padding:0">
+        <td valign="top" style="width: 200px; padding: 0">
             <ul id="ui-list" class="ui-list">
-                <li ms-repeat="widgets">
-                    <a  href="javascript:void(0)"
-                        ms-class-odd="$index % 2 === 1"
-                        ms-class="active: $index===activeIndex"
-                        ms-click="changeActiveIndex($index, $event)">
-                        {{($index+1)+'. '+el.value}}
-                    </a>
-                </li>
+                <li ms-repeat="widgets"><a href="javascript:void(0)" ms-class-odd="$index % 2 === 1"
+                    ms-class="active: $index===activeIndex" ms-click="changeActiveIndex($index, $event)">
+                    {{($index+1)+'. '+el.value}} </a></li>
             </ul>
         </td>
         <td valign="top">
-		<div width="100%" ms-css-height="frameContentHeight">
-			<div class='search'>
-				<input type="text" placeholder="报表名或说明..." ms-duplex="afind"> <!-- ms-focus="searchFocus" -->
-				
-				<a href="javascript:void(0);" ms-click="search"></a>			
-			</div>
-			<div ms-widget="smartgrid, sg1" ms-css-display="none"></div>
-			<button ms-click="reRenderData">重新渲染数据</button>
-			<button ms-click="clearData">清空数据</button>
-			<button ms-widget="button" data-button-size="large">size large</button>
-			<button ms-widget="button" data-button-type="icon" data-button-icon="\&\#xf015;" data-button-icon-position="left" data-button-size="small" >icon only</button>
-			<input ms-duplex="username"/>{{username}}	 
-		</div>
+            <div class='search'>
+                <input type="text" placeholder="报表名或说明..." ms-duplex="afind">
+                <!-- ms-focus="searchFocus" -->
+                <a href="javascript:void(0);" ms-click="search"></a>
+            </div>
+            <div id="ui-right" width="100%" ms-css-height="frameContentHeight">
+                <div ms-widget="smartgrid, sg1, opts" style="margin: 0 auto" ms-css-display="none">
+                </div>
+            </div>
             <!-- <iframe ms-src="widgetHref" frameborder="0" width="100%" ms-css-height="frameContentHeight" id="widgetFrame" ></iframe> -->
         </td>
     </tr>
