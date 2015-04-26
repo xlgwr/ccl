@@ -52,7 +52,7 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			        vm.none = 'none';
 			        //widgets
 			        vm.widgets = widgets
-			        vm.aname = "Business  Development";
+			        vm.aname = "All";
 			        vm.aprefix = "";
 			        vm.activeIndex = 0
 			        vm.widgetHref = ""
@@ -94,10 +94,10 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			                //avalon.log(res);
 			                vmodel.state.setSucc(res);
 			                res.push({ "name": "All", "value": "All" })
-			                // vmodel.widgets=res.sort(function(a,b){
-			                // //console.log(a['value'].substring(0,1)+','+b['value'].substring(0,1));
-			                // return a['value'].substring(0,1)>b['value'].substring(0,1);								
-			                // });
+			                vmodel.widgets = res.sort(function (a, b) {
+			                    //console.log(a['value'].substring(0,1)+','+b['value'].substring(0,1));
+			                    return a['value'].substring(0, 1) > b['value'].substring(0, 1);
+			                });
 			                vmodel.widgets = res
 			                vmodel.changeActiveIndex(-1);
 			                vmodel.ajaxGetJSONSub();
@@ -121,7 +121,7 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			                    vm.aname = curLocation.split(".")[1] //exp: datepicker
 			                    vm.activeIndex = vm.widgets.indexOf(name)
 			                } else { //exp：..../index.html
-			                    vm.aname = "Business  Development"//Business  Development
+			                    vm.aname = "All"//Business  Development
 			                }
 			            }
 			            vm.aprefix = 'report'; //name //处理一般情况
@@ -131,7 +131,7 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			                    vm.aprefix = "report"
 			                    break
 			                case "html": //处理默认无后缀情况
-			                    vm.aname = "Business  Development"
+			                    vm.aname = "All"
 			                    vm.aprefix = "report"
 			                    break
 			            }
@@ -320,7 +320,7 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			        /////////////////////////////////////end define for vmodel
 			    });
 			    vmodel.$watch("aname", function (a, b) {
-			        avalon.log("UserName:" + a + "," + b);
+			        //avalon.log("UserName:" + a + "," + b);
 			        vmodel.ajaxGetJSONSub()
 			    });
 			    vmodel.$watch('afind', function (a) {
@@ -332,7 +332,7 @@ define(["avalon", "text!./aaa.html", "css!./aaa.css"], function (avalon, aaa) {
 			    avalon.vmodels.page.pagesrc = "aaa"
 			    avalon.log("load: init");
 			    vmodel.ajaxGetJSON();
-			    
+
 			    avalon.scan();
 
 			});
