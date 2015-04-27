@@ -18,7 +18,7 @@ exports.initRedis=function(req,res){
 	    };
 	    db.sql.close();
 	    redisClient.set(getQadReportName,JSON.stringify(recordset));
-
+	    recordset.push({'name':'All','value':'All'});
 	    for(var i = 0; i < recordset.length; i++) {
 		var tmpsubname=getQadReportName+recordset[i]["value"];
 		console.log(tmpsubname);

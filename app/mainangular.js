@@ -4,8 +4,14 @@ requirejs.config({
     baseUrl: 'bower_components',
     paths: {
         jquery: './jquery/dist/jquery',
-		angular: './angularjs/angular',
+		angular: './angular/angular',
 		'angular-route': './angular-route/angular-route',
+
+
+		text: './text/text',
+		domReady: './domReady/domReady',
+		css: './require-css/css',
+
 		'app': '../modules/app/app',
         //config
         config: '../config/config'
