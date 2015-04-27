@@ -5,6 +5,8 @@ require.config({
     paths: {
         jquery: './jquery/dist/jquery',
         avalon: "./avalon/avalon.shim", //必须修改源码 Or shim，禁用自带加载器，或直接删提AMD加载器模块
+		angular: './angularjs/angular',
+		
         text: './text/text',
         domReady: './domReady/domReady',
         css: './require-css/css',
@@ -22,6 +24,9 @@ require.config({
         },
         avalon: {
             exports: "avalon"
+        },
+		angular: {
+            exports: "angular"
         },
         aaa: {
             exports: "aaa"

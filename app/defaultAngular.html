@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html ng-app='app'>
+<head>
+    <title>捷和电机集团</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <!--  <meta http-equiv="x-ua-compatible" content="ie=edge" />  -->
+    <meta name="language" content="en">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="捷和电机集团可以在全球范围内，提供独一无二的工程解决方案，可以满足特定应用的需求。">
+    <meta name="keywords" content="捷和电机集团 捷和电机 捷和 电机">
+    <meta name="author" content="xlgwr">
+    <style>
+        body
+        {
+            background-color: White !important;
+        }
+        .ms-controller
+        {
+            visibility: hidden;
+        }
+        #avalon_oniui_banner
+        {
+            -moz-border-radius: 0 0 10px 10px;
+            -webkit-border-radius: 0 0 10px 10px;
+            margin: 0 5px auto 5px;
+            box-shadow: 0 0 0 0 #000000;
+            background-color: White;
+            top: 20px;
+        }
+        #avalon_oniui_banner, #avalon_oniui_banner span
+        {
+            height: 100px;
+            line-height: 100px;
+        }
+        #avalon_oniui_banner span
+        {
+            border-radius: 0 0 10px 10px;
+            background: rgba(0,75,141,0.6);
+            width: 990px;
+        }
+        
+        #content
+        {
+            top: 20px;
+        }
+        #logo
+        {
+            -moz-background-size: 100% 100%;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body ng-controller='demo'>
+    <div class="header">
+        <div class="fix">
+            <div id="nav" class="nav">
+                <!-- <a id="logo" class="logo" ms-href='{{ location.href.indexOf("localhost") !== -1 ? "/default.html": "/default.html"}}'> -->
+                </a>
+                <ul id="oniui_component_list">
+                  <!--   <li ms-repeat-page="pages" ms-class="active: $index == activeIndex" ms-click="changeActiveIndex($index)">
+                        <a ms-href="#{{page.href}}">{{page.title | html}}</a> </li> -->
+                </ul>
+            </div>
+        </div>
+        <div class="placeHolder">
+        </div>
+        <h1 id="avalon_oniui_banner">
+            <span>报表中心</span></h1>
+			{{greeting}}
+    </div>
+    <!-- <div id="content" class="content" ms-class="content{{activeIndex}}">
+        <div ms-include-src="pagesrc">
+           
+        </div>
+    </div> -->
+    <div class="footer">
+        <ul>
+            <li><a href="#">关于捷和电机集团</a></li>
+            <li><a href="#">联系我们</a></li>
+            <li><a href="#">业务合作</a></li>
+            <li><a href="#">常见问题</a></li>
+            <li class="last"><a href="#">友情链接</a></li>
+        </ul>
+    </div>
+    <script data-main="mainangular.js" src="./node_modules/requirejs/require.js"></script>
+</body>
+</html>
