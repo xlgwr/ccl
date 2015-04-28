@@ -13,6 +13,7 @@ define([
         //'app.services',
         //'app.filters',
         //'app.directives',
+            'ngRoute',
             'app.controllers']);
-        
+
     });

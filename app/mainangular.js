@@ -4,15 +4,16 @@ require.config({
     baseUrl: 'bower_components',
     paths: {
         jquery: './jquery/dist/jquery',
-		angular: './angular/angular',
-		'angular-route': './angular-route/angular-route',
+        angular: './angular/angular',
+        'angular-route': './angular-route/angular-route',
+        'angular-resource': './angular-resource/angular-resource',
+        'angular-cookies': './angular-cookies/angular-cookies',
+        text: './text/text',
+        domReady: './domReady/domReady',
+        css: './require-css/css',
 
-
-		text: './text/text',
-		domReady: './domReady/domReady',
-		css: './require-css/css',
-
-		'app': '../modules/app/app',
+        'app': '../modules/app/app',
+        'routes': '../modules/app/routes',
         //config
         config: '../config/config'
     },
@@ -21,12 +22,18 @@ require.config({
         jquery: {
             exports: "jQuery"
         },
-		angular: {
+        angular: {
             exports: "angular"
         },
-		'angular-route': {
+        'angular-route': {
             //exports: "angular-route"
-			deps:['angular']
+            deps: ['angular']
+        },
+        'angular-resource': {
+            deps: ['angular']
+        },
+        'angular-cookies': {
+            deps: ['angular']
         },
         app: {
             exports: "app"
@@ -34,13 +41,13 @@ require.config({
         config: {
             exports: "config"
         }
-		
+
     },
     deps: ['../modules/bootstrap']
 });
 // require(['angular','angular-route','config'],function(angular){
-	// console.info(angular.version);
-	// console.info(config.acaoIp);
+// console.info(angular.version);
+// console.info(config.acaoIp);
 // });
 //require(['app'], function(app){
 //	//todo: some thing
