@@ -5,7 +5,7 @@ define([
     ], function (app) {
         //使用严格模式
         'use strict';
-        return app.config(['$routeProvider', '$locationProvider', function ($routeProvider) {
+        return app.config(['$routeProvider', '$locationProvider', function ($routeProvider,$locationProvider) {
             $routeProvider.when('/', {
                 templateUrl: '/app/partials/main.html',
                 controller: 'MainCtrl'
@@ -15,7 +15,7 @@ define([
             }).otherwise({
                 redirectTo: '/home'
             });
-            console.log("route:start");
+            console.log("route:start 1");
             $locationProvider.html5Mode(false).hashPrefix('!');
         } ]);
     });

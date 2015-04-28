@@ -3,6 +3,7 @@ define([
     'require',
     'angular',
     'angular-route',
+    'angular-resource',
     'routes'
     ], function (require, ng) {
         //使用严格模式
