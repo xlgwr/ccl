@@ -1,6 +1,6 @@
 'use strict';
 
-requirejs.config({
+require.config({
     baseUrl: 'bower_components',
     paths: {
         jquery: './jquery/dist/jquery',
@@ -35,14 +35,15 @@ requirejs.config({
             exports: "config"
         }
 		
-    }
+    },
+    deps: ['../modules/bootstrap']
 });
 // require(['angular','angular-route','config'],function(angular){
 	// console.info(angular.version);
 	// console.info(config.acaoIp);
 // });
-require(['app'], function(app){
-	//todo: some thing
-	console.log("start:demo");
-	
-});
+//require(['app'], function(app){
+//	//todo: some thing
+//	console.log("start:demo");
+//	
+//});

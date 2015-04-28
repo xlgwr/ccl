@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app='app'>
+<html>
 <head>
     <title>捷和电机集团</title>
     <meta charset="UTF-8">
@@ -52,14 +52,13 @@
         }
     </style>
 </head>
-<body ng-controller='demo'>
+<body ng-controller='MyCtrl1'>
     <div class="header">
         <div class="fix">
             <div id="nav" class="nav">
-                <!-- <a id="logo" class="logo" ms-href='{{ location.href.indexOf("localhost") !== -1 ? "/default.html": "/default.html"}}'> -->
-                </a>
+                <!-- <a id="logo" class="logo" ms-href='{{ location.href.indexOf("localhost") !== -1 ? "/default.html": "/default.html"}}'>                 </a>-->
                 <ul id="oniui_component_list">
-                  <!--   <li ms-repeat-page="pages" ms-class="active: $index == activeIndex" ms-click="changeActiveIndex($index)">
+                    <!--   <li ms-repeat-page="pages" ms-class="active: $index == activeIndex" ms-click="changeActiveIndex($index)">
                         <a ms-href="#{{page.href}}">{{page.title | html}}</a> </li> -->
                 </ul>
             </div>
@@ -68,13 +67,13 @@
         </div>
         <h1 id="avalon_oniui_banner">
             <span>报表中心</span></h1>
-			{{greeting}}
     </div>
     <!-- <div id="content" class="content" ms-class="content{{activeIndex}}">
         <div ms-include-src="pagesrc">
            
         </div>
     </div> -->
+    {{greeting}}
     <div class="footer">
         <ul>
             <li><a href="#">关于捷和电机集团</a></li>
