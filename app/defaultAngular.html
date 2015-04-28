@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>捷和电机集团</title>
@@ -50,9 +50,12 @@
             -moz-background-size: 100% 100%;
             background-size: 100% 100%;
         }
+	[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{
+	 display: none!important;
+	}
     </style>
 </head>
-<body ng-controller='MyCtrl1'>
+<body class="ng-cloak" ng-controller='MyCtrl1'>
     <div class="header">
         <div class="fix">
             <div id="nav" class="nav">
@@ -74,6 +77,8 @@
         </div>
     </div> -->
     {{greeting}}
+      
+    </div>
     <div class="footer">
         <ul>
             <li><a href="#">关于捷和电机集团</a></li>
