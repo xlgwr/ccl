@@ -2,5 +2,6 @@
 //加载app时会自动加载angular.
 define([
     './my-ctrl-1',
-    './my-ctrl-2'
+    './my-ctrl-2',
+    './main'
     ], function () {});

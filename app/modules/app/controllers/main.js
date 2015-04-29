@@ -3,9 +3,9 @@
 define(['./module'], function (controllers) {
     //使用严格模式
     'use strict';
-    controllers.controller('MyCtrl2', [
+    controllers.controller('MainCtrl', ['$scope',
         function ($scope) {
-            console.log("MyCtrl2：");
+            console.log("MainCtrl：main."+Date());
         }
     ]);
 

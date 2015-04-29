@@ -14,6 +14,7 @@ define([
         //'app.filters',
         //'app.directives',
             'ngRoute',
+            //'ngResource',
             'app.controllers']);
 
     });

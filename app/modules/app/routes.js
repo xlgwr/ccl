@@ -7,10 +7,10 @@ define([
         'use strict';
         return app.config(['$routeProvider', '$locationProvider', function ($routeProvider,$locationProvider) {
             $routeProvider.when('/', {
-                templateUrl: '/app/partials/main.html',
+                templateUrl: './modules/app/partials/main.html',
                 controller: 'MainCtrl'
             }).when('/home', {
-                templateUrl: '/app/partials/Show.html',
+                templateUrl: './app/partials/Show.html',
                 controller: 'ShowCtrl'
             }).otherwise({
                 redirectTo: '/home'
