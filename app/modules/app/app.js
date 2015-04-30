@@ -9,12 +9,14 @@ define([
     ], function (ng) {
         //使用严格模式
         'use strict';
-        return ng.module('app', [
+        return ng.module('docsApp', [
         //'app.services',
         //'app.filters',
         //'app.directives',
             'ngRoute',
+            'ngAnimate',
+            'ngMaterial',
             //'ngResource',
-            'app.controllers']);
+            'docsApp.controllers']);
 
     });

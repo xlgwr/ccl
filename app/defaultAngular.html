@@ -1,12 +1,13 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-controller="DocsCtrl" ng-strict-di>
 <head>
     <title>捷和电机集团</title>
     <meta charset="UTF-8">
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <meta name="viewport" content="width=device-width">
-    <!--  <meta http-equiv="x-ua-compatible" content="ie=edge" />  -->
-    <meta name="language" content="en">
+    <!--    <meta name="viewport" content="width=device-width">-->
+    <meta name="viewport" content="initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <!--  <meta name="language" content="en">  -->
     <meta name="robots" content="index, follow">
     <meta name="description" content="捷和电机集团可以在全球范围内，提供独一无二的工程解决方案，可以满足特定应用的需求。">
     <meta name="keywords" content="捷和电机集团 捷和电机 捷和 电机">
@@ -50,45 +51,119 @@
             -moz-background-size: 100% 100%;
             background-size: 100% 100%;
         }
-	[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{
-	 display: none!important;
-	}
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak
+        {
+            display: none !important;
+        }
     </style>
+    <link rel="stylesheet" href="./vendor/styleng/css.css?family=RobotoDraft:300,400,500,700,400italic">
+    <link rel="stylesheet" href="./vendor/styleng/docs.css">
 </head>
-<body class="ng-cloak" ng-controller='MyCtrl1'>
-    <div class="header">
-        <div class="fix">
-            <div id="nav" class="nav">
-                <!-- <a id="logo" class="logo" ms-href='{{ location.href.indexOf("localhost") !== -1 ? "/default.html": "/default.html"}}'>                 </a>-->
-                <ul id="oniui_component_list">
-                    <!--   <li ms-repeat-page="pages" ms-class="active: $index == activeIndex" ms-click="changeActiveIndex($index)">
-                        <a ms-href="#{{page.href}}">{{page.title | html}}</a> </li> -->
-                </ul>
-            </div>
+<body class="ng-cloak" layout="row">
+    <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left"
+        md-is-locked-open="$mdMedia('gt-sm')">
+
+    <md-toolbar>
+      <h1 class="md-toolbar-tools">
+        <a ng-href="#/" layout="row" flex class="docs-logo">
+          <md-icon md-svg-src="menu"></md-icon>
+          <div class="docs-logotype">Material Design</div>
+        </a>
+      </h1>
+    </md-toolbar>
+
+    <ul class="skip-links">
+      <li class="md-whiteframe-z2">
+        <md-button ng-click="focusMainContent($event)" href="#">Skip to content</md-button>
+      </li>
+    </ul>
+
+    <md-content flex role="navigation">
+      <ul class="docs-menu">
+        <li ng-repeat="section in menu.sections" class="parent-list-item" ng-class="{'parentActive' : isSectionSelected(section)}">
+          <h2 class="menu-heading md-subhead" ng-if="section.type === 'heading'" id="heading_{{ section.name | nospace }}">
+            {{section.name}}
+          </h2>
+          <menu-link section="section" ng-if="section.type === 'link'"></menu-link>
+
+          <menu-toggle section="section" ng-if="section.type === 'toggle'"></menu-toggle>
+
+          <ul ng-if="section.children" class="menu-nested-list">
+            <li ng-repeat="child in section.children" ng-class="{'childActive' : isSectionSelected(child)}">
+              <menu-link section="child" ng-if="child.type === 'link'"></menu-link>
+
+              <menu-toggle section="child" ng-if="child.type === 'toggle'"></menu-toggle>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </md-content>
+  </md-sidenav>
+    <div layout="column" tabindex="-1" role="main" flex>
+        <md-toolbar>
+
+      <div class="md-toolbar-tools docs-toolbar-tools" ng-click="openMenu()" tabIndex="-1">
+        <md-button class="md-icon-button" hide-gt-sm aria-label="Toggle Menu">
+          <md-icon md-svg-src="vendor/styleng/img/icons/ic_menu_24px.svg"></md-icon>
+        </md-button>
+        <div layout="row" flex class="fill-height">
+          <h2 class="md-toolbar-item md-breadcrumb">
+            <span ng-if="menu.currentPage.name !== menu.currentSection.name">
+              <span hide-sm hide-md>{{menu.currentSection.name}}</span>
+              <span class="docs-menu-separator-icon" hide-sm hide-md style="transform: translate3d(0, 1px, 0)">
+                <span class="md-visually-hidden">-</span>
+                <img src="vendor/styleng/img/docArrow.png" alt="" aria-hidden="true">
+              </span>
+            </span>
+            <span class="md-breadcrumb-page">{{(menu.currentPage | humanizeDoc) || 'Angular Material' }}</span>
+          </h2>
+
+          <span flex></span> <!-- use up the empty space -->
+
+          <div class="md-toolbar-item docs-tools" layout="column" layout-gt-md="row">
+            <md-button ng-if="!menu.currentPage || menu.currentSection.name === 'Getting Started'"
+                       target="_blank"
+                       ng-href="{{BUILDCONFIG.repository}}/commit/{{BUILDCONFIG.commit}}" >
+                {{BUILDCONFIG.version}}  -  SHA {{BUILDCONFIG.commit.substring(0,7)}}
+            </md-button>
+
+            <md-button ng-repeat="doc in currentComponent.docs"
+              ng-href="#{{doc.url}}"
+              ng-class="{hide: path().indexOf('demo') == -1}"
+              aria-label="{{ doc | humanizeDoc }}">
+              {{doc | humanizeDoc | directiveBrackets}}
+            </md-button>
+
+            <md-button ng-class="{hide: !currentDoc || !currentDoc.hasDemo}"
+              ng-href="#/demo/{{currentComponent.name}}">
+              <md-icon md-svg-src="vendor/styleng/img/icons/ic_play_arrow_24px.svg"></md-icon>
+              <span>View Demo</span>
+            </md-button>
+
+            <md-button ng-class="{hide: !currentDoc}"
+              ng-href="{{currentDoc.githubUrl}}"
+              hide-sm hide-md>
+              <md-icon md-svg-src="vendor/styleng/img/icons/ic_launch_24px.svg"></md-icon>
+              <span>View on Github</span>
+            </md-button>
+          </div>
         </div>
-        <div class="placeHolder">
-        </div>
-        <h1 id="avalon_oniui_banner">
-            <span>报表中心</span></h1>
+      </div>
+
+    </md-toolbar>
+        <md-content ng-view md-scroll-y flex layout-padding></md-content>
     </div>
-    <!-- <div id="content" class="content" ms-class="content{{activeIndex}}">
-        <div ms-include-src="pagesrc">
-           
-        </div>
-    </div> -->
-    <div ng-view />
-    {{greeting}}
-      
-    </div>
-    <div class="footer">
-        <ul>
-            <li><a href="#">关于捷和电机集团</a></li>
-            <li><a href="#">联系我们</a></li>
-            <li><a href="#">业务合作</a></li>
-            <li><a href="#">常见问题</a></li>
-            <li class="last"><a href="#">友情链接</a></li>
-        </ul>
-    </div>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+              m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-8594346-14', 'auto');
+        ga('send', 'pageview');
+    </script>
     <script data-main="mainangular.js" src="./node_modules/requirejs/require.js"></script>
 </body>
 </html>

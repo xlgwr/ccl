@@ -3,6 +3,6 @@
 define(['angular'], function (ng) {
     //使用严格模式
     'use strict';
-    return ng.module('app.controllers',[]);
+    return ng.module('docsApp.controllers', []);
 
 });
